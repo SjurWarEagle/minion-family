@@ -7,11 +7,14 @@ export class MinionDnaEye {
 
 export class MinionDna {
   public name: string = 'TODO';
+  public twoEyes: boolean;
   public eyeLeft: MinionDnaEye;
   public eyeRight: MinionDnaEye;
+  public eye: MinionDnaEye;
   public pocket: boolean;
   public gloves: boolean;
   public shoes: boolean;
+  public skinColor: number;
   /**
    * The way the mouth is formed
    */

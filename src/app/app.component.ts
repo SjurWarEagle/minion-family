@@ -1,16 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
+  @ViewChild('all', {static: false})
+  public allMinions: ElementRef;
+
   public nrMinions = [];
 
   public ngOnInit(): void {
-    this.nrMinions = Array(44)
-      .fill(0)
-      .map((x, i) => i);
   }
+
+  @HostListener('window:resize')
+  public recalc(): void {
+    const size = this.allMinions.nativeElement.getBoundingClientRect();
+    // console.log('allMinions', size);
+    const heightOfMinionDisplay = 200 + 20;//icon+name
+    const widthOfMinionDisplay = 200;//icon+name
+    const cols = Math.floor(size.width / widthOfMinionDisplay);
+    const rows = Math.floor(size.height / heightOfMinionDisplay);
+    const cnt = cols * rows;
+    // console.log('cnt', cnt);
+    setTimeout(() => {
+      this.nrMinions = Array(cnt)
+        .fill(0)
+        .map((x, i) => i);
+    });
+  }
+
+  public ngAfterViewInit(): void {
+    this.recalc();
+  }
+
 }

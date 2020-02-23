@@ -1,4 +1,8 @@
-.lists{
+.lists {
   display: flex;
   flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
 }

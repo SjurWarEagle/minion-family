@@ -35,7 +35,7 @@ jobs:
         # Allow an empty commit to be created
         allow_empty_commit: # optional, default is true
         # Build directory to deploy
-        build_dir: dist/
+        build_dir: dist/minion-family
         # Commit author's name
         committer_name: # optional
         # Commit author's email

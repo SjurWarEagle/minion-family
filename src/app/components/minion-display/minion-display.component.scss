@@ -1,0 +1,17 @@
+.container {
+  border: darkgray;
+  border-style: dotted;
+  border-width: 1px;
+}
+
+.minion {
+  width: 10em;
+  height: 10em;
+  max-width: 10em;
+  max-height: 10em;
+}
+.name {
+  text-align: center;
+  margin-left: 1em;
+  margin-top: 0.5em;
+}

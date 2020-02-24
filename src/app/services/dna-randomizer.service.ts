@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
-import { MinionDna } from '../model/minion-dna';
-import { Chance } from 'chance';
+import {Injectable} from '@angular/core';
+import {MinionDna} from '../model/minion-dna';
+import {Chance} from 'chance';
+import * as chroma from 'chroma-js';
 
 @Injectable({
   providedIn: 'root'
@@ -8,25 +9,34 @@ import { Chance } from 'chance';
 export class DnaRandomizerService {
   private chance = new Chance();
 
-  constructor() {}
+  constructor() {
+  }
 
   public async generateMinion(): Promise<MinionDna> {
     const dna = new MinionDna();
     // dna.name = 'Tino' + this.chance.integer({ min: 0, max: 9999 }) + '//';
     dna.name = this.chance.name();
 
-    dna.pocket = this.chance.bool({ likelihood: 80 });
-    dna.gloves = this.chance.bool({ likelihood: 80 });
-    dna.shoes = this.chance.bool({ likelihood: 80 });
-    dna.mood = this.chance.floating({ min: -75, max: 100 });
-    dna.skinColor = this.chance.integer({ min: 0, max: 100 });
-    dna.twoEyes = this.chance.bool({ likelihood: 80 });
+    dna.pocket = this.chance.bool({likelihood: 80});
+    dna.gloves = this.chance.bool({likelihood: 80});
+    dna.shoes = this.chance.bool({likelihood: 80});
+    dna.mood = this.chance.floating({min: -75, max: 100});
+    dna.skinColor = this.chance.integer({min: 0, max: 100});
+    dna.twoEyes = this.chance.bool({likelihood: 80});
 
-    const irisRadius = this.chance.floating({ min: 3, max: 10 });
-    const eyeRadius = this.chance.floating({ min: 10, max: 20 });
-    const irisShift = this.chance.floating({ min: 0, max: 6 });
+    const irisRadius = this.chance.floating({min: 3, max: 10});
+    const eyeRadius = this.chance.floating({min: 12, max: 20});
+    const irisShift = this.chance.floating({min: 0, max: 6});
 
-    const color = this.chance.color({ grayscale: true });
+    //grayscale pupils, color ones looked strange
+    // maybe add them later with a low chance
+    let color = '#FFFFFF';
+    while (chroma(color).luminance() > 0.25) {
+      color = chroma.random().desaturate(255).hex();
+      // console.log(chroma(color).luminance());
+      // console.log('color',color);
+    }
+
 
     dna.eyeLeft = {
       pupilShift: irisShift,

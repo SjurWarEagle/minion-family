@@ -15,6 +15,7 @@ export class MinionDna {
   public gloves: boolean;
   public shoes: boolean;
   public skinColor: number;
+  public hairType: number;
   /**
    * The way the mouth is formed
    */

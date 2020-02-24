@@ -22,6 +22,7 @@ export class DnaRandomizerService {
     dna.shoes = this.chance.bool({likelihood: 80});
     dna.mood = this.chance.floating({min: -75, max: 100});
     dna.skinColor = this.chance.integer({min: 0, max: 100});
+    dna.hairType = this.chance.integer({min: 0, max: 2});
     dna.twoEyes = this.chance.bool({likelihood: 80});
 
     const irisRadius = this.chance.floating({min: 3, max: 10});

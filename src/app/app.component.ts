@@ -18,11 +18,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   public recalc(): void {
     const size = this.allMinions.nativeElement.getBoundingClientRect();
     // console.log('allMinions', size);
-    const heightOfMinionDisplay = 200 + 20;//icon+name
-    const widthOfMinionDisplay = 200;//icon+name
+    const heightOfMinionDisplay = 230 + 20;//icon+name
+    const widthOfMinionDisplay = 210;//icon+name
     const cols = Math.floor(size.width / widthOfMinionDisplay);
     const rows = Math.floor(size.height / heightOfMinionDisplay);
     const cnt = cols * rows;
+    // console.log('cols', cols);
+    // console.log('rows', rows);
     // console.log('cnt', cnt);
     setTimeout(() => {
       this.nrMinions = Array(cnt)

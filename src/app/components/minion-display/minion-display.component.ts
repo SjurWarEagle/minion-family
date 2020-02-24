@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { DnaRandomizerService } from '../../services/dna-randomizer.service';
-import { MinionDna, MinionDnaEye } from '../../model/minion-dna';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {DnaRandomizerService} from '../../services/dna-randomizer.service';
+import {MinionDna, MinionDnaEye} from '../../model/minion-dna';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import * as chroma from 'chroma-js';
 
 @Component({
@@ -10,13 +10,14 @@ import * as chroma from 'chroma-js';
   styleUrls: ['./minion-display.component.scss']
 })
 export class MinionDisplayComponent implements AfterViewInit {
-  @ViewChild('dataContainer', { static: true })
+  @ViewChild('dataContainer', {static: true})
   public dataContainer: ElementRef;
 
   private minionDna: MinionDna;
   private svg: HTMLElement | any;
 
-  constructor(private http: HttpClient, private dnaRandomizerService: DnaRandomizerService) {}
+  constructor(private http: HttpClient, private dnaRandomizerService: DnaRandomizerService) {
+  }
 
   public ngAfterViewInit(): void {
     this.loadImage().catch(console.error);
@@ -64,6 +65,7 @@ export class MinionDisplayComponent implements AfterViewInit {
 
     this.setMouth(this.svg.getElementById('mouth'), this.minionDna.mood);
     this.setSkinColor(this.minionDna);
+    this.setHair(this.minionDna.hairType);
   }
 
   private setMouth(element, mood: number) {
@@ -118,6 +120,25 @@ export class MinionDisplayComponent implements AfterViewInit {
 
   private setEye(pupil, eye: MinionDnaEye): void {
     pupil.setAttribute('r', eye.eyeRadius.toString());
+  }
+
+  private setHair(hair: number): void {
+    switch (hair) {
+      case 0:
+        this.svg.getElementById('hairSpiked').remove();
+        this.svg.getElementById('hairSprout').remove();
+        break;
+      case 1:
+        this.svg.getElementById('hairSprout').remove();
+        break;
+      case 2:
+        this.svg.getElementById('hairSpiked').remove();
+        break;
+      default:
+        console.log(`Hair ${hair} unkown.`);
+
+    }
+
   }
 
   private setEyes(pupilLeft, pupilRight, leftEye: MinionDnaEye, rightEye: MinionDnaEye): void {

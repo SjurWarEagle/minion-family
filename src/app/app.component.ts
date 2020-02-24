@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,20 +6,19 @@ import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} f
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  @ViewChild('all', {static: false})
+  @ViewChild('all', { static: false })
   public allMinions: ElementRef;
 
   public nrMinions = [];
 
-  public ngOnInit(): void {
-  }
+  public ngOnInit(): void {}
 
   @HostListener('window:resize')
   public recalc(): void {
     const size = this.allMinions.nativeElement.getBoundingClientRect();
     // console.log('allMinions', size);
-    const heightOfMinionDisplay = 230 + 20;//icon+name
-    const widthOfMinionDisplay = 210;//icon+name
+    const heightOfMinionDisplay = 230 + 20; //icon+name
+    const widthOfMinionDisplay = 210; //icon+name
     const cols = Math.floor(size.width / widthOfMinionDisplay);
     const rows = Math.floor(size.height / heightOfMinionDisplay);
     const cnt = cols * rows;
@@ -36,5 +35,4 @@ export class AppComponent implements OnInit, AfterViewInit {
   public ngAfterViewInit(): void {
     this.recalc();
   }
-
 }

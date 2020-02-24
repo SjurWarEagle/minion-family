@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
-import {DnaRandomizerService} from '../../services/dna-randomizer.service';
-import {MinionDna, MinionDnaEye} from '../../model/minion-dna';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { DnaRandomizerService } from '../../services/dna-randomizer.service';
+import { MinionDna, MinionDnaEye } from '../../model/minion-dna';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as chroma from 'chroma-js';
 
 @Component({
@@ -10,14 +10,13 @@ import * as chroma from 'chroma-js';
   styleUrls: ['./minion-display.component.scss']
 })
 export class MinionDisplayComponent implements AfterViewInit {
-  @ViewChild('dataContainer', {static: true})
+  @ViewChild('dataContainer', { static: true })
   public dataContainer: ElementRef;
 
   private minionDna: MinionDna;
   private svg: HTMLElement | any;
 
-  constructor(private http: HttpClient, private dnaRandomizerService: DnaRandomizerService) {
-  }
+  constructor(private http: HttpClient, private dnaRandomizerService: DnaRandomizerService) {}
 
   public ngAfterViewInit(): void {
     this.loadImage().catch(console.error);
@@ -136,9 +135,7 @@ export class MinionDisplayComponent implements AfterViewInit {
         break;
       default:
         console.log(`Hair ${hair} unkown.`);
-
     }
-
   }
 
   private setEyes(pupilLeft, pupilRight, leftEye: MinionDnaEye, rightEye: MinionDnaEye): void {

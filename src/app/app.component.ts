@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('all', { static: false })
   public allMinions: ElementRef;
 
+  public svgContent: string;
+
   public nrMinions = [];
 
   public ngOnInit(): void {}
+
+  constructor(private http: HttpClient) {}
 
   @HostListener('window:resize')
   public recalc(): void {
@@ -33,6 +38,21 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
+    this.loadImage();
     this.recalc();
+  }
+
+  private async loadImage(): Promise<void> {
+    const headers = new HttpHeaders();
+    headers.set('Accept', 'image/svg+xml');
+    // noinspection UnnecessaryLocalVariableJS
+    const content = await this.http
+      .get('./assets/minions-svgrepo-com.svg', {
+        headers,
+        responseType: 'text'
+      })
+      .toPromise();
+    // console.log('content=', content);
+    this.svgContent = content;
   }
 }

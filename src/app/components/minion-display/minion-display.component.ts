@@ -1,8 +1,7 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
-import {DnaRandomizerService} from '../../services/dna-randomizer.service';
-import {MinionDna, MinionDnaEye} from '../../model/minion-dna';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {v1} from 'uuid';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { DnaRandomizerService } from '../../services/dna-randomizer.service';
+import { MinionDna, MinionDnaEye } from '../../model/minion-dna';
+import { v1 } from 'uuid';
 import * as chroma from 'chroma-js';
 
 @Component({
@@ -10,42 +9,38 @@ import * as chroma from 'chroma-js';
   templateUrl: './minion-display.component.html',
   styleUrls: ['./minion-display.component.scss']
 })
-export class MinionDisplayComponent implements AfterViewInit {
-  @ViewChild('dataContainer', {static: true})
+export class MinionDisplayComponent {
+  @ViewChild('dataContainer', { static: true })
   public dataContainer: ElementRef;
+
+  private _svgContent: string;
+
+  @Input()
+  set svgContent(content: string) {
+    this._svgContent = content;
+    setTimeout(() => {
+      this.renderData().catch(console.error);
+    });
+    // console.log('content',content);
+  }
 
   private minionDna: MinionDna;
   private svg: HTMLElement | any;
 
   private ids = {
-    eyeRadiant: '',
-  }
+    eyeRadiant: ''
+  };
 
-  constructor(private http: HttpClient, private dnaRandomizerService: DnaRandomizerService) {
-  }
+  constructor(private dnaRandomizerService: DnaRandomizerService) {}
 
-  public ngAfterViewInit(): void {
-    this.loadImage().catch(console.error);
-  }
+  private async renderData(): Promise<void> {
+    if (!this._svgContent) {
+      return;
+    }
 
-  private async loadImage(): Promise<void> {
-    const headers = new HttpHeaders();
-    headers.set('Accept', 'image/svg+xml');
-    // noinspection UnnecessaryLocalVariableJS
-    const content = await this.http
-      .get('./assets/minions-svgrepo-com.svg', {
-        headers,
-        responseType: 'text'
-      })
-      .toPromise();
-    // console.log('content=', content);
-    this.dataContainer.nativeElement.innerHTML = content;
-    this.minionDna = await this.dnaRandomizerService.generateMinion();
-
+    this.dataContainer.nativeElement.innerHTML = this._svgContent;
     this.svg = (this.dataContainer.nativeElement as HTMLElement).children.item(0) as HTMLElement | any;
-
-    // const svg = (this.dataContainer.nativeElement as HTMLElement).children.item(0) as SVGElement;
-    // console.log('svg', svg);
+    this.minionDna = await this.dnaRandomizerService.generateMinion();
 
     this.updateIds(this.svg);
     this.setGradientForIris(this.svg.getElementById(this.ids.eyeRadiant), this.minionDna.eye.color);
@@ -124,7 +119,6 @@ export class MinionDisplayComponent implements AfterViewInit {
     // pupil.style.fill = minionDna.color;
     // pupil.style.stroke = minionDna.color;
     // console.log('pupil', pupil);
-
   }
 
   private setEye(pupil, eye: MinionDnaEye): void {
@@ -153,8 +147,6 @@ export class MinionDisplayComponent implements AfterViewInit {
 
     (gradient.children[1] as any).style = 'stop-color:' + color;
     (gradient.children[2] as any).style = 'stop-color:' + color;
-
-
   }
 
   private setEyes(pupilLeft, pupilRight, leftEye: MinionDnaEye, rightEye: MinionDnaEye): void {
@@ -165,11 +157,17 @@ export class MinionDisplayComponent implements AfterViewInit {
   private updateIds(svg: HTMLElement | any) {
     const id = v1();
     this.ids.eyeRadiant = 'singleEyeIris' + id;
-    svg.getElementById('radialGradient29600').setAttribute('id', this.ids.eyeRadiant)
+    svg.getElementById('radialGradient29600').setAttribute('id', this.ids.eyeRadiant);
     // console.log(svg.getElementById(this.ids.eyeRadiant));
-    svg.getElementById('singleEyePupilPart1').style = `fill:url(#${this.ids.eyeRadiant});fill-rule:evenodd;stroke-width:0.04412191`;
-    svg.getElementById('doubleEyesPupilLeftPart1').style = `fill:url(#${this.ids.eyeRadiant});fill-rule:evenodd;stroke-width:0.04412191`;
-    svg.getElementById('doubleEyesPupilRightPart1').style = `fill:url(#${this.ids.eyeRadiant});fill-rule:evenodd;stroke-width:0.04412191`;
+    svg.getElementById(
+      'singleEyePupilPart1'
+    ).style = `fill:url(#${this.ids.eyeRadiant});fill-rule:evenodd;stroke-width:0.04412191`;
+    svg.getElementById(
+      'doubleEyesPupilLeftPart1'
+    ).style = `fill:url(#${this.ids.eyeRadiant});fill-rule:evenodd;stroke-width:0.04412191`;
+    svg.getElementById(
+      'doubleEyesPupilRightPart1'
+    ).style = `fill:url(#${this.ids.eyeRadiant});fill-rule:evenodd;stroke-width:0.04412191`;
     // console.log(svg.getElementById('singleEyePupilPart1'));
   }
 }

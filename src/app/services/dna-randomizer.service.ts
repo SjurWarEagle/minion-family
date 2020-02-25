@@ -32,9 +32,7 @@ export class DnaRandomizerService {
     // maybe add them later with a low chance
     let color = '#FFFFFF';
     while (chroma(color).luminance() > 0.25) {
-      color = chroma
-        .random()
-        .hex();
+      color = chroma.random().hex();
       // color = chroma
       //   .random()
       //   .desaturate(255)

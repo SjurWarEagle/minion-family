@@ -57,8 +57,8 @@ export class MinionDisplayComponent implements AfterViewInit {
         this.minionDna.eyeRight,
         this.minionDna.eyeLeft
       );
-      this.setPupilTwoEyes(this.svg.getElementById('pupilLeft'), this.minionDna.eyeLeft);
-      this.setPupilTwoEyes(this.svg.getElementById('pupilRight'), this.minionDna.eyeRight);
+      this.setPupilTwoEyes(this.svg.getElementById('doubleEyesPupilLeft'), this.minionDna.eyeLeft);
+      this.setPupilTwoEyes(this.svg.getElementById('doubleEyesPupilRight'), this.minionDna.eyeRight);
 
       this.svg.getElementById('groupSingleEye').remove(0);
     } else {
@@ -111,11 +111,12 @@ export class MinionDisplayComponent implements AfterViewInit {
     }
   }
 
-  private setPupilTwoEyes(pupilLeft, minionDna: MinionDnaEye): void {
+  private setPupilTwoEyes(pupil: SVGGElement, minionDna: MinionDnaEye): void {
     // pupilLeft.setAttribute('r', minionDna.irisRadius.toString());
     // pupilLeft.setAttribute('cx', Number.parseFloat(pupilLeft.getAttribute('cx')) + minionDna.pupilShift);
     // pupilLeft.style.fill = minionDna.color;
     // pupilLeft.style.stroke = minionDna.color;
+    pupil.setAttribute('transform', `${pupil.getAttribute('transform')} translate(${minionDna.pupilShift},0)`);
   }
 
   private setPupilSingleEye(pupil, minionDna: MinionDnaEye): void {

@@ -99,7 +99,6 @@ export class MinionDisplayComponent implements AfterViewInit {
     this.svg.getElementById('skinArmRight').style.fill = color;
     this.svg.getElementById('skinBodyLeft').style.fill = color;
     this.svg.getElementById('skinArmLeft').style.fill = color;
-    this.svg.getElementById('skinLegs').style.fill = color;
 
     if (!this.minionDna.shoes) {
       this.svg.getElementById('shoeLeft').style.fill = color;

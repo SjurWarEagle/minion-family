@@ -25,6 +25,7 @@
     "gsap": "3.2.0",
     "chance": "1.1.4",
     "chroma-js": "2.1.0",
+    "uuid": "7.0.0",
     "zone.js": "0.10.2"
   },
   "devDependencies": {
@@ -37,6 +38,7 @@
     "@types/chance": "1.0.8",
     "@types/chroma-js": "2.0.0",
     "@types/node": "13.7.4",
+    "@types/uuid": "3.4.7",
     "@types/gsap": "1.20.2",
     "codelyzer": "5.2.1",
     "jasmine-core": "3.5.0",

@@ -24,8 +24,8 @@ export class DnaRandomizerService {
     dna.hairType = this.chance.integer({ min: 0, max: 2 });
     dna.twoEyes = this.chance.bool({ likelihood: 80 });
 
-    const irisRadius = this.chance.floating({ min: 3, max: 8 });
-    const eyeRadius = this.chance.floating({ min: 12, max: 20 });
+    const irisRadius = this.chance.floating({ min: 2, max: 5 });
+    const eyeRadius = this.chance.floating({ min: 15, max: 22 });
     const irisShift = this.chance.floating({ min: 0, max: 6 });
 
     //grayscale pupils, color ones looked strange
@@ -34,10 +34,11 @@ export class DnaRandomizerService {
     while (chroma(color).luminance() > 0.25) {
       color = chroma
         .random()
-        .desaturate(255)
         .hex();
-      // console.log(chroma(color).luminance());
-      // console.log('color',color);
+      // color = chroma
+      //   .random()
+      //   .desaturate(255)
+      //   .hex();
     }
 
     dna.eyeLeft = {

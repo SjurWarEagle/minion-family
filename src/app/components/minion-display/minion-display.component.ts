@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { DnaRandomizerService } from '../../services/dna-randomizer.service';
-import { MinionDna, MinionDnaEye } from '../../model/minion-dna';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {DnaRandomizerService} from '../../services/dna-randomizer.service';
+import {MinionDna, MinionDnaEye} from '../../model/minion-dna';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {v1} from 'uuid';
 import * as chroma from 'chroma-js';
 
 @Component({
@@ -10,13 +11,18 @@ import * as chroma from 'chroma-js';
   styleUrls: ['./minion-display.component.scss']
 })
 export class MinionDisplayComponent implements AfterViewInit {
-  @ViewChild('dataContainer', { static: true })
+  @ViewChild('dataContainer', {static: true})
   public dataContainer: ElementRef;
 
   private minionDna: MinionDna;
   private svg: HTMLElement | any;
 
-  constructor(private http: HttpClient, private dnaRandomizerService: DnaRandomizerService) {}
+  private ids = {
+    eyeRadiant: '',
+  }
+
+  constructor(private http: HttpClient, private dnaRandomizerService: DnaRandomizerService) {
+  }
 
   public ngAfterViewInit(): void {
     this.loadImage().catch(console.error);
@@ -41,6 +47,9 @@ export class MinionDisplayComponent implements AfterViewInit {
     // const svg = (this.dataContainer.nativeElement as HTMLElement).children.item(0) as SVGElement;
     // console.log('svg', svg);
 
+    this.updateIds(this.svg);
+    this.setGradientForIris(this.svg.getElementById(this.ids.eyeRadiant), this.minionDna.eye.color);
+
     if (this.minionDna.twoEyes) {
       this.setEyes(
         this.svg.getElementById('eyeRight'),
@@ -54,7 +63,7 @@ export class MinionDisplayComponent implements AfterViewInit {
       this.svg.getElementById('groupSingleEye').remove(0);
     } else {
       this.setEye(this.svg.getElementById('eye'), this.minionDna.eyeRight);
-      this.setPupilSingleEye(this.svg.getElementById('pupil'), this.minionDna.eye);
+      this.setPupilSingleEye(this.svg.getElementById('singleEyePupil'), this.minionDna.eye);
       this.svg.getElementById('groupDoubleEyes').remove();
     }
 
@@ -104,17 +113,18 @@ export class MinionDisplayComponent implements AfterViewInit {
   }
 
   private setPupilTwoEyes(pupilLeft, minionDna: MinionDnaEye): void {
-    pupilLeft.setAttribute('r', minionDna.irisRadius.toString());
-    pupilLeft.setAttribute('cx', Number.parseFloat(pupilLeft.getAttribute('cx')) + minionDna.pupilShift);
-    pupilLeft.style.fill = minionDna.color;
-    pupilLeft.style.stroke = minionDna.color;
+    // pupilLeft.setAttribute('r', minionDna.irisRadius.toString());
+    // pupilLeft.setAttribute('cx', Number.parseFloat(pupilLeft.getAttribute('cx')) + minionDna.pupilShift);
+    // pupilLeft.style.fill = minionDna.color;
+    // pupilLeft.style.stroke = minionDna.color;
   }
 
-  private setPupilSingleEye(pupilLeft, minionDna: MinionDnaEye): void {
-    pupilLeft.setAttribute('r', minionDna.irisRadius.toString());
-    // pupilLeft.setAttribute('cy', Number.parseFloat(pupilLeft.getAttribute('cy')) + minionDna.pupilShift);
-    pupilLeft.style.fill = minionDna.color;
-    pupilLeft.style.stroke = minionDna.color;
+  private setPupilSingleEye(pupil, minionDna: MinionDnaEye): void {
+    // pupil.setAttribute('r', minionDna.irisRadius.toString());
+    // pupil.style.fill = minionDna.color;
+    // pupil.style.stroke = minionDna.color;
+    // console.log('pupil', pupil);
+
   }
 
   private setEye(pupil, eye: MinionDnaEye): void {
@@ -138,8 +148,28 @@ export class MinionDisplayComponent implements AfterViewInit {
     }
   }
 
+  private setGradientForIris(gradient: SVGRadialGradientElement, color: string): void {
+    // console.log('gradient',gradient.children[2]);
+
+    (gradient.children[1] as any).style = 'stop-color:' + color;
+    (gradient.children[2] as any).style = 'stop-color:' + color;
+
+
+  }
+
   private setEyes(pupilLeft, pupilRight, leftEye: MinionDnaEye, rightEye: MinionDnaEye): void {
     pupilLeft.setAttribute('r', leftEye.eyeRadius.toString());
     pupilRight.setAttribute('r', rightEye.eyeRadius.toString());
+  }
+
+  private updateIds(svg: HTMLElement | any) {
+    const id = v1();
+    this.ids.eyeRadiant = 'singleEyeIris' + id;
+    svg.getElementById('radialGradient29600').setAttribute('id', this.ids.eyeRadiant)
+    // console.log(svg.getElementById(this.ids.eyeRadiant));
+    svg.getElementById('singleEyePupilPart1').style = `fill:url(#${this.ids.eyeRadiant});fill-rule:evenodd;stroke-width:0.04412191`;
+    svg.getElementById('doubleEyesPupilLeftPart1').style = `fill:url(#${this.ids.eyeRadiant});fill-rule:evenodd;stroke-width:0.04412191`;
+    svg.getElementById('doubleEyesPupilRightPart1').style = `fill:url(#${this.ids.eyeRadiant});fill-rule:evenodd;stroke-width:0.04412191`;
+    // console.log(svg.getElementById('singleEyePupilPart1'));
   }
 }

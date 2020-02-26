@@ -1,7 +1,7 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { DnaRandomizerService } from '../../services/dna-randomizer.service';
-import { MinionDna, MinionDnaEye } from '../../model/minion-dna';
-import { v1 } from 'uuid';
+import {Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {DnaRandomizerService} from '../../services/dna-randomizer.service';
+import {MinionDna, MinionDnaEye} from '../../model/minion-dna';
+import {v1} from 'uuid';
 import * as chroma from 'chroma-js';
 
 @Component({
@@ -10,7 +10,7 @@ import * as chroma from 'chroma-js';
   styleUrls: ['./minion-display.component.scss']
 })
 export class MinionDisplayComponent {
-  @ViewChild('dataContainer', { static: true })
+  @ViewChild('dataContainer', {static: true})
   public dataContainer: ElementRef;
 
   private _svgContent: string;
@@ -31,7 +31,8 @@ export class MinionDisplayComponent {
     eyeRadiant: ''
   };
 
-  constructor(private dnaRandomizerService: DnaRandomizerService) {}
+  constructor(private dnaRandomizerService: DnaRandomizerService) {
+  }
 
   private async renderData(): Promise<void> {
     if (!this._svgContent) {
@@ -41,6 +42,11 @@ export class MinionDisplayComponent {
     this.dataContainer.nativeElement.innerHTML = this._svgContent;
     this.svg = (this.dataContainer.nativeElement as HTMLElement).children.item(0) as HTMLElement | any;
     this.minionDna = await this.dnaRandomizerService.generateMinion();
+
+    // minion original color: fce029
+    const colorScale = chroma.scale(['fce029', 'fcc629']).domain([0, 100]);
+    const skinColor = colorScale(this.minionDna.skinColor).hex();
+
 
     this.updateIds(this.svg);
     this.setGradientForIris(this.svg.getElementById(this.ids.eyeRadiant), this.minionDna.eye.color);
@@ -67,8 +73,9 @@ export class MinionDisplayComponent {
     }
 
     this.setMouth(this.svg.getElementById('mouth'), this.minionDna.mood);
-    this.setSkinColor(this.minionDna);
+    this.setSkinColor(this.minionDna, skinColor);
     this.setHair(this.minionDna.hairType);
+    this.setTrouthers(this.minionDna.onlyUnderwear, skinColor);
   }
 
   private setMouth(element, mood: number) {
@@ -83,26 +90,23 @@ export class MinionDisplayComponent {
     this.svg.getElementById('mouth').setAttribute('d', dd.join(' '));
   }
 
-  private setSkinColor(minionDna: MinionDna) {
-    // minion original color: fce029
-    const colorScale = chroma.scale(['fce029', 'fcc629']).domain([0, 100]);
-    const color = colorScale(minionDna.skinColor).hex();
+  private setSkinColor(minionDna: MinionDna, skinColor: string) {
     // console.log('color',color);
 
-    this.svg.getElementById('skinHead').style.fill = color;
-    this.svg.getElementById('skinBodyRight').style.fill = color;
-    this.svg.getElementById('skinArmRight').style.fill = color;
-    this.svg.getElementById('skinBodyLeft').style.fill = color;
-    this.svg.getElementById('skinArmLeft').style.fill = color;
+    this.svg.getElementById('skinHead').style.fill = skinColor;
+    // this.svg.getElementById('skinBodyRight').style.fill = skinColor;
+    this.svg.getElementById('skinArmRight').style.fill = skinColor;
+    // this.svg.getElementById('skinBodyLeft').style.fill = skinColor;
+    this.svg.getElementById('skinArmLeft').style.fill = skinColor;
 
     if (!this.minionDna.shoes) {
-      this.svg.getElementById('shoeLeft').style.fill = color;
-      this.svg.getElementById('shoeRight').style.fill = color;
+      this.svg.getElementById('shoeLeft').style.fill = skinColor;
+      this.svg.getElementById('shoeRight').style.fill = skinColor;
     }
 
     if (!this.minionDna.gloves) {
-      this.svg.getElementById('gloveLeft').style.fill = color;
-      this.svg.getElementById('gloveRight').style.fill = color;
+      this.svg.getElementById('gloveLeft').style.fill = skinColor;
+      this.svg.getElementById('gloveRight').style.fill = skinColor;
     }
   }
 
@@ -123,6 +127,19 @@ export class MinionDisplayComponent {
 
   private setEye(pupil, eye: MinionDnaEye): void {
     pupil.setAttribute('r', eye.eyeRadius.toString());
+  }
+
+  private setTrouthers(onlyUnderwear: boolean, skinColor: string): void {
+    if (onlyUnderwear) {
+      this.svg.getElementById('shirtSlapRight').remove();
+      this.svg.getElementById('shirtSlapLeft').remove();
+      if (this.svg.getElementById('pocket')) {
+        this.svg.getElementById('pocket').remove();
+      }
+      this.svg.getElementById('shirt').remove();
+      this.svg.getElementById('underwear').style.fill = 'white';
+      this.svg.getElementById('legs').style.fill = skinColor;
+    }
   }
 
   private setHair(hair: number): void {

@@ -1,7 +1,7 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { DnaRandomizerService } from '../../services/dna-randomizer.service';
-import { MinionDna, MinionDnaEye } from '../../model/minion-dna';
-import { v1 } from 'uuid';
+import {Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {DnaRandomizerService} from '../../services/dna-randomizer.service';
+import {MinionDna, MinionDnaEye} from '../../model/minion-dna';
+import {v1} from 'uuid';
 import * as chroma from 'chroma-js';
 
 @Component({
@@ -10,7 +10,7 @@ import * as chroma from 'chroma-js';
   styleUrls: ['./minion-display.component.scss']
 })
 export class MinionDisplayComponent {
-  @ViewChild('dataContainer', { static: true })
+  @ViewChild('dataContainer', {static: true})
   public dataContainer: ElementRef;
 
   private _svgContent: string;
@@ -31,7 +31,8 @@ export class MinionDisplayComponent {
     eyeRadiant: ''
   };
 
-  constructor(private dnaRandomizerService: DnaRandomizerService) {}
+  constructor(private dnaRandomizerService: DnaRandomizerService) {
+  }
 
   private async renderData(): Promise<void> {
     if (!this._svgContent) {
@@ -190,6 +191,23 @@ export class MinionDisplayComponent {
   private setItemInHand(holdsItem: boolean, itemInHand: number) {
     if (!holdsItem) {
       this.svg.getElementById('banana').remove();
+      this.svg.getElementById('wrench').remove();
+      this.svg.getElementById('hammer').remove();
+    } else {
+      switch (itemInHand) {
+        case 1:
+          this.svg.getElementById('banana').remove();
+          this.svg.getElementById('hammer').remove();
+          break;
+        case 2:
+          this.svg.getElementById('banana').remove();
+          this.svg.getElementById('wrench').remove();
+          break;
+        case 3:
+          this.svg.getElementById('wrench').remove();
+          this.svg.getElementById('hammer').remove();
+          break;
+      }
     }
   }
 }

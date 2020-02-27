@@ -1,7 +1,7 @@
-import {Component, ElementRef, Input, ViewChild} from '@angular/core';
-import {DnaRandomizerService} from '../../services/dna-randomizer.service';
-import {MinionDna, MinionDnaEye} from '../../model/minion-dna';
-import {v1} from 'uuid';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { DnaRandomizerService } from '../../services/dna-randomizer.service';
+import { MinionDna, MinionDnaEye } from '../../model/minion-dna';
+import { v1 } from 'uuid';
 import * as chroma from 'chroma-js';
 
 @Component({
@@ -10,7 +10,7 @@ import * as chroma from 'chroma-js';
   styleUrls: ['./minion-display.component.scss']
 })
 export class MinionDisplayComponent {
-  @ViewChild('dataContainer', {static: true})
+  @ViewChild('dataContainer', { static: true })
   public dataContainer: ElementRef;
 
   private _svgContent: string;
@@ -31,8 +31,7 @@ export class MinionDisplayComponent {
     eyeRadiant: ''
   };
 
-  constructor(private dnaRandomizerService: DnaRandomizerService) {
-  }
+  constructor(private dnaRandomizerService: DnaRandomizerService) {}
 
   private async renderData(): Promise<void> {
     if (!this._svgContent) {
@@ -46,7 +45,6 @@ export class MinionDisplayComponent {
     // minion original color: fce029
     const colorScale = chroma.scale(['fce029', 'fcc629']).domain([0, 100]);
     const skinColor = colorScale(this.minionDna.skinColor).hex();
-
 
     this.updateIds(this.svg);
     this.setGradientForIris(this.svg.getElementById(this.ids.eyeRadiant), this.minionDna.eye.color);
@@ -76,6 +74,7 @@ export class MinionDisplayComponent {
     this.setSkinColor(this.minionDna, skinColor);
     this.setHair(this.minionDna.hairType);
     this.setTrouthers(this.minionDna.onlyUnderwear, skinColor);
+    this.setItemInHand(this.minionDna.holdsItem, this.minionDna.itemInHand);
   }
 
   private setMouth(element, mood: number) {
@@ -186,5 +185,11 @@ export class MinionDisplayComponent {
       'doubleEyesPupilRightPart1'
     ).style = `fill:url(#${this.ids.eyeRadiant});fill-rule:evenodd;stroke-width:0.04412191`;
     // console.log(svg.getElementById('singleEyePupilPart1'));
+  }
+
+  private setItemInHand(holdsItem: boolean, itemInHand: number) {
+    if (!holdsItem) {
+      this.svg.getElementById('banana').remove();
+    }
   }
 }

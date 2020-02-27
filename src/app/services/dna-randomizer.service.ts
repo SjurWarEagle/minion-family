@@ -13,7 +13,6 @@ export class DnaRandomizerService {
 
   public async generateMinion(): Promise<MinionDna> {
     const dna = new MinionDna();
-    // dna.name = 'Tino' + this.chance.integer({ min: 0, max: 9999 }) + '//';
     dna.name = this.chance.name();
 
     dna.pocket = this.chance.bool({ likelihood: 80 });
@@ -24,6 +23,10 @@ export class DnaRandomizerService {
     dna.hairType = this.chance.integer({ min: 0, max: 2 });
     dna.twoEyes = this.chance.bool({ likelihood: 80 });
     dna.onlyUnderwear = this.chance.bool({ likelihood: 3 });
+    dna.holdsItem = this.chance.bool({ likelihood: 20 });
+    if (dna.holdsItem) {
+      dna.itemInHand = this.chance.integer({ min: 1, max: 1 });
+    }
 
     const irisRadius = this.chance.floating({ min: 2, max: 5 });
     const eyeRadius = this.chance.floating({ min: 15, max: 22 });

@@ -193,19 +193,32 @@ export class MinionDisplayComponent {
       this.svg.getElementById('banana').remove();
       this.svg.getElementById('wrench').remove();
       this.svg.getElementById('hammer').remove();
+      this.svg.getElementById('router').remove();
     } else {
       switch (itemInHand) {
         case 1:
-          this.svg.getElementById('banana').remove();
+          // this.svg.getElementById('banana').remove();
           this.svg.getElementById('hammer').remove();
+          this.svg.getElementById('wrench').remove();
+          this.svg.getElementById('router').remove();
           break;
         case 2:
           this.svg.getElementById('banana').remove();
+          // this.svg.getElementById('hammer').remove();
           this.svg.getElementById('wrench').remove();
+          this.svg.getElementById('router').remove();
           break;
         case 3:
-          this.svg.getElementById('wrench').remove();
+          this.svg.getElementById('banana').remove();
           this.svg.getElementById('hammer').remove();
+          // this.svg.getElementById('wrench').remove();
+          this.svg.getElementById('router').remove();
+          break;
+        case 4:
+          this.svg.getElementById('banana').remove();
+          this.svg.getElementById('hammer').remove();
+          this.svg.getElementById('wrench').remove();
+          // this.svg.getElementById('router').remove();
           break;
       }
     }

@@ -25,7 +25,7 @@ export class DnaRandomizerService {
     dna.onlyUnderwear = this.chance.bool({ likelihood: 3 });
     dna.holdsItem = this.chance.bool({ likelihood: 20 });
     if (dna.holdsItem) {
-      dna.itemInHand = this.chance.integer({ min: 1, max: 3 });
+      dna.itemInHand = this.chance.integer({ min: 1, max: 4 });
     }
 
     const irisRadius = this.chance.floating({ min: 2, max: 5 });

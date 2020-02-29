@@ -2,16 +2,23 @@ import { Injectable } from '@angular/core';
 import { MinionDna } from '../model/minion-dna';
 import { Chance } from 'chance';
 import * as chroma from 'chroma-js';
+import { DnaGenerationParameters } from '../model/dna-generation-parameter';
 
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Generates the DNA for a minion by random values.
+ * The values are within a reasonable range,
+ * so that e.g. the eyes are not overlapping and such,
+ * but the outcome is random.
+ */
 export class DnaRandomizerService {
   private chance = new Chance();
 
   constructor() {}
 
-  public async generateMinion(): Promise<MinionDna> {
+  public async generateMinion(dnaGenerationParameters?: DnaGenerationParameters): Promise<MinionDna> {
     const dna = new MinionDna();
     dna.name = this.chance.name();
 
@@ -36,11 +43,16 @@ export class DnaRandomizerService {
     // maybe add them later with a low chance
     let color = '#FFFFFF';
     while (chroma(color).luminance() > 0.25) {
-      color = chroma.random().hex();
-      // color = chroma
-      //   .random()
-      //   .desaturate(255)
-      //   .hex();
+      if (dnaGenerationParameters && dnaGenerationParameters.allowColoredEyes) {
+        color = chroma.random().hex();
+      } else {
+        color = chroma
+          .random()
+          .desaturate(255)
+          .hex();
+      }
+      // console.log(chroma(color).luminance());
+      // console.log('color',color);
     }
 
     dna.eyeLeft = {

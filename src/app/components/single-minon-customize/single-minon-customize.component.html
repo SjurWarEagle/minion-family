@@ -1,0 +1,42 @@
+<div *ngIf="minionDna">
+  <mat-label>Eyes:</mat-label>
+  <mat-button-toggle-group name="nrEyes" (valueChange)="eyesChanged($event)" [value]="minionDna.twoEyes ? '2' : '1'">
+    <mat-button-toggle value="1">1</mat-button-toggle>
+    <mat-button-toggle value="2">2</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <div *ngIf="minionDna.twoEyes">
+    <mat-label>Eye shift:</mat-label>
+    <mat-slider [(value)]="minionDna.eyeLeft.pupilShift" min="-7" max="8" (change)="triggerUpdate()" [step]="1"></mat-slider>
+    <mat-slider [(value)]="minionDna.eyeRight.pupilShift" min="-7" max="8" (change)="triggerUpdate()" [step]="1"></mat-slider>
+    <mat-label>Eye Radius:</mat-label>
+    <mat-slider [(value)]="minionDna.eyeLeft.eyeRadius" min="15" max="20" (change)="triggerUpdate()" [step]=".1"></mat-slider>
+    <mat-slider [(value)]="minionDna.eyeRight.eyeRadius" min="15" max="20" (change)="triggerUpdate()" [step]=".1"></mat-slider>
+<!--    <mat-label>Iris Radius:</mat-label>-->
+<!--    <mat-slider [(value)]="minionDna.eyeLeft.irisRadius" min="5" max="13" (change)="triggerUpdate()" [step]=".1"></mat-slider>-->
+<!--    <mat-slider [(value)]="minionDna.eyeRight.irisRadius" min="5" max="12" (change)="triggerUpdate()" [step]=".1"></mat-slider>-->
+  </div>
+
+  <div *ngIf="!minionDna.twoEyes">
+    <mat-label>Eye shift:</mat-label>
+    <mat-slider [(value)]="minionDna.eye.pupilShift" min="-7" max="8" (change)="triggerUpdate()" [step]="1"></mat-slider>
+    <mat-label>Eye Radius:</mat-label>
+    <mat-slider [(value)]="minionDna.eye.eyeRadius" min="15" max="20" (change)="triggerUpdate()" [step]=".1"></mat-slider>
+  </div>
+
+  <mat-label>Mood:</mat-label>
+  <mat-slider [(value)]="minionDna.mood" min="-50" max="100" (change)="triggerUpdate()" [step]="1"></mat-slider>
+
+  <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.gloves">Gloves</mat-checkbox><br />
+  <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.shoes">Shoes</mat-checkbox><br />
+  <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.holdsItem">Item</mat-checkbox><br />
+  <div *ngIf="minionDna.holdsItem">
+    <mat-slider [(value)]="minionDna.itemInHand" min="1" max="4" (change)="triggerUpdate()" [step]="1"></mat-slider>
+  </div>
+  <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.onlyUnderwear">Underwear</mat-checkbox><br />
+  <div *ngIf="!minionDna.onlyUnderwear">
+    <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.pocket">Pocket</mat-checkbox><br />
+  </div>
+  <mat-label>Hair:</mat-label>
+  <mat-slider [(value)]="minionDna.hairType" min="0" max="2" (change)="triggerUpdate()" [step]="1"></mat-slider><br />
+</div>

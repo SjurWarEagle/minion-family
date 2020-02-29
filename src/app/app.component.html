@@ -1,5 +1,6 @@
-<div class="lists" #all>
-  <div *ngFor="let nr of nrMinions">
-    <app-minion-display [svgContent]="svgContent"></app-minion-display>
-  </div>
+<span><a routerLink="wall"><fa-icon [icon]="minionWallIcon"></fa-icon></a></span>&nbsp;
+<span><a routerLink="customizer"><fa-icon [icon]="minionCustomizerIcon"></fa-icon></a></span>
+
+<div style="height: 100%; width: 100%">
+  <router-outlet style="height: 100%; width: 100%"></router-outlet>
 </div>

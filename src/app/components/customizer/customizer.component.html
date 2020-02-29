@@ -1,0 +1,14 @@
+<div class="all">
+  <div class="config">
+    <app-single-minon-customize
+      [minionDna]="currentMinionDna"
+      (minionDnaChanged)="updateMinionDna($event)"
+    ></app-single-minon-customize>
+  </div>
+  <div class="display">
+    <app-minion-display
+      [svgContent]="svgContent"
+      [minionDnaToShow]="currentMinionDna"
+    ></app-minion-display>
+  </div>
+</div>

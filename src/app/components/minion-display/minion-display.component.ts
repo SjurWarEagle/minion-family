@@ -1,7 +1,7 @@
-import {Component, ElementRef, Input, ViewChild} from '@angular/core';
-import {DnaRandomizerService} from '../../services/dna-randomizer.service';
-import {MinionDna, MinionDnaEye} from '../../model/minion-dna';
-import {v1} from 'uuid';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { DnaRandomizerService } from '../../services/dna-randomizer.service';
+import { MinionDna, MinionDnaEye } from '../../model/minion-dna';
+import { v1 } from 'uuid';
 import * as chroma from 'chroma-js';
 
 @Component({
@@ -10,10 +10,11 @@ import * as chroma from 'chroma-js';
   styleUrls: ['./minion-display.component.scss']
 })
 export class MinionDisplayComponent {
-  @ViewChild('dataContainer', {static: true})
+  @ViewChild('dataContainer', { static: true })
   public dataContainer: ElementRef;
 
   private _svgContent: string;
+  private minionDna: MinionDna;
 
   @Input()
   set svgContent(content: string) {
@@ -21,18 +22,20 @@ export class MinionDisplayComponent {
     setTimeout(() => {
       this.renderData().catch(console.error);
     });
-    // console.log('content',content);
   }
 
-  private minionDna: MinionDna;
+  @Input()
+  set minionDnaToShow(minionDna: MinionDna) {
+    this.minionDna = minionDna;
+    this.renderData();
+  }
   private svg: HTMLElement | any;
 
   private ids = {
     eyeRadiant: ''
   };
 
-  constructor(private dnaRandomizerService: DnaRandomizerService) {
-  }
+  constructor(private dnaRandomizerService: DnaRandomizerService) {}
 
   private async renderData(): Promise<void> {
     if (!this._svgContent) {
@@ -41,7 +44,11 @@ export class MinionDisplayComponent {
 
     this.dataContainer.nativeElement.innerHTML = this._svgContent;
     this.svg = (this.dataContainer.nativeElement as HTMLElement).children.item(0) as HTMLElement | any;
-    this.minionDna = await this.dnaRandomizerService.generateMinion();
+    if (!this.minionDna) {
+      this.minionDna = await this.dnaRandomizerService.generateMinion({ allowColoredEyes: true });
+    }
+    this.svg.setAttribute('height', '100%');
+    this.svg.setAttribute('width', '100%');
 
     // minion original color: fce029
     const colorScale = chroma.scale(['fce029', 'fcc629']).domain([0, 100]);

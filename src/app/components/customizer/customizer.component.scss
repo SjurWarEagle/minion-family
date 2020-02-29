@@ -1,0 +1,15 @@
+.all {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-template-areas: 'config display';
+}
+
+.config {
+  margin: 2em;
+}
+
+.display {
+  width: 25vw;
+}

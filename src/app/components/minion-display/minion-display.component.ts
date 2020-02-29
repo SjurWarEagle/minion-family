@@ -47,8 +47,9 @@ export class MinionDisplayComponent {
     if (!this.minionDna) {
       this.minionDna = await this.dnaRandomizerService.generateMinion({ allowColoredEyes: true });
     }
-    this.svg.setAttribute('height', '100%');
-    this.svg.setAttribute('width', '100%');
+    const svgSize = 'calc(100% - 1.5em)';
+    this.svg.setAttribute('height', svgSize);
+    this.svg.setAttribute('width', svgSize);
 
     // minion original color: fce029
     const colorScale = chroma.scale(['fce029', 'fcc629']).domain([0, 100]);
@@ -79,7 +80,7 @@ export class MinionDisplayComponent {
     }
 
     this.setMouth(this.svg.getElementById('mouth'), this.minionDna.mood);
-    this.setSkinColor(this.minionDna, skinColor);
+    this.setSkinColor(skinColor);
     this.setHair(this.minionDna.hairType);
     this.setTrouthers(this.minionDna.onlyUnderwear, skinColor);
     this.setItemInHand(this.minionDna.holdsItem, this.minionDna.itemInHand);
@@ -97,7 +98,7 @@ export class MinionDisplayComponent {
     this.svg.getElementById('mouth').setAttribute('d', dd.join(' '));
   }
 
-  private setSkinColor(minionDna: MinionDna, skinColor: string) {
+  private setSkinColor(skinColor: string) {
     // console.log('color',color);
 
     this.svg.getElementById('skinHead').style.fill = skinColor;

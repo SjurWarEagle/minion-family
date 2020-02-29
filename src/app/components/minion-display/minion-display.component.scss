@@ -1,17 +1,14 @@
 .container {
-  //border: darkgray;
-  //border-style: dotted;
-  //border-width: 1px;
+  //border: 1px dotted darkgray;
   height: 100%;
   width: 100%;
 }
 
 .minion {
-  //width: 100px;
+  justify-self: center;
 }
 
 .name {
   text-align: center;
-  margin-left: 1em;
-  margin-top: 0.5em;
+  margin: auto;
 }

@@ -1,7 +1,15 @@
-<div class="buttons">
-<span class="selection-button"><a routerLink="wall"><fa-icon [icon]="minionWallIcon"></fa-icon></a></span>&nbsp;
-<span class="selection-button"><a routerLink="customizer"><fa-icon [icon]="minionCustomizerIcon"></fa-icon></a></span>
-</div>
+<button mat-icon-button [matMenuTriggerFor]="menu" style="position: absolute">
+  <mat-icon>more_vert</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="wall">
+    <fa-icon [icon]="minionWallIcon"></fa-icon><span class="action-label">Wall</span>
+  </button>
+  <button mat-menu-item routerLink="customizer">
+    <fa-icon [icon]="minionCustomizerIcon"></fa-icon><span class="action-label">Customize</span>
+  </button>
+</mat-menu>
 
 <div style="height: 100%; width: 100%">
   <router-outlet style="height: 100%; width: 100%"></router-outlet>

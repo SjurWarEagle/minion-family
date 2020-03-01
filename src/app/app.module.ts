@@ -16,6 +16,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -35,6 +39,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatButtonToggleModule,
     MatSliderModule,
     MatCheckboxModule,
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule,
     MatFormFieldModule
   ],
   providers: [],

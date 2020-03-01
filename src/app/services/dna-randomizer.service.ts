@@ -51,10 +51,14 @@ export class DnaRandomizerService {
     dna.leftHandHoldsItem = this.chance.bool({ likelihood: 20 });
     if (dna.leftHandHoldsItem) {
       dna.leftHandItem = this.chance.integer({ min: 1, max: 4 });
+    } else {
+      dna.leftHandItem = 1;
     }
     dna.rightHandHoldsItem = this.chance.bool({ likelihood: 20 });
     if (dna.rightHandHoldsItem) {
       dna.rightHandItem = this.chance.integer({ min: 1, max: 4 });
+    } else {
+      dna.rightHandItem = 1;
     }
 
     const irisRadius = this.chance.floating({ min: 2, max: 5 });

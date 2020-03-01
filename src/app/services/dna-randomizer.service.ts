@@ -18,18 +18,36 @@ export class DnaRandomizerService {
 
   constructor() {}
 
+  private generateCloth(dna: MinionDna): void {
+    const rnd = this.chance.integer({ min: 0, max: 100 });
+    let cloth = 0;
+    if (rnd <= 1) {
+      dna.pocket = false;
+      cloth = 0;
+    } else if (rnd <= 2) {
+      dna.pocket = false;
+      cloth = 1;
+    } else {
+      dna.pocket = this.chance.bool({ likelihood: 80 });
+      cloth = 2;
+    }
+
+    dna.cloths = cloth;
+  }
+
   public async generateMinion(dnaGenerationParameters?: DnaGenerationParameters): Promise<MinionDna> {
     const dna = new MinionDna();
     dna.name = this.chance.name();
 
-    dna.pocket = this.chance.bool({ likelihood: 80 });
     dna.gloves = this.chance.bool({ likelihood: 80 });
     dna.shoes = this.chance.bool({ likelihood: 80 });
     dna.mood = this.chance.floating({ min: -75, max: 100 });
     dna.skinColor = this.chance.integer({ min: 0, max: 100 });
     dna.hairType = this.chance.integer({ min: 0, max: 4 });
+
+    this.generateCloth(dna);
+
     dna.twoEyes = this.chance.bool({ likelihood: 80 });
-    dna.onlyUnderwear = this.chance.bool({ likelihood: 3 });
     dna.leftHandHoldsItem = this.chance.bool({ likelihood: 20 });
     if (dna.leftHandHoldsItem) {
       dna.leftHandItem = this.chance.integer({ min: 1, max: 4 });

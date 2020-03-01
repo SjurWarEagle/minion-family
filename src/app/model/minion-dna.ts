@@ -11,7 +11,7 @@ export class MinionDna {
   public eyeLeft: MinionDnaEye;
   public eyeRight: MinionDnaEye;
   public eye: MinionDnaEye;
-  public onlyUnderwear: boolean;
+  public cloths: number;
   public pocket: boolean;
   public gloves: boolean;
   public shoes: boolean;

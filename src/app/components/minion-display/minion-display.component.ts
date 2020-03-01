@@ -78,13 +78,15 @@ export class MinionDisplayComponent {
     }
 
     if (!this.minionDna.pocket) {
-      this.svg.getElementById('pocket').remove();
+      if (this.svg.getElementById('pocket')) {
+        this.svg.getElementById('pocket').remove();
+      }
     }
 
     this.setMouth(this.svg.getElementById('mouth'), this.minionDna.mood);
     this.setSkinColor(skinColor);
     this.setHair(this.minionDna.hairType);
-    this.setTrouthers(this.minionDna.onlyUnderwear, skinColor);
+    this.setCloth(this.minionDna.cloths, skinColor);
     this.setItemInHands('leftHand', this.minionDna.leftHandHoldsItem, this.minionDna.leftHandItem);
     this.setItemInHands('rightHand', this.minionDna.rightHandHoldsItem, this.minionDna.rightHandItem);
   }
@@ -104,6 +106,7 @@ export class MinionDisplayComponent {
   private setSkinColor(skinColor: string) {
     // console.log('color',color);
 
+    this.svg.getElementById('skinLegs').style.fill = skinColor;
     this.svg.getElementById('skinHead').style.fill = skinColor;
     // this.svg.getElementById('skinBodyRight').style.fill = skinColor;
     this.svg.getElementById('skinArmRight').style.fill = skinColor;
@@ -140,16 +143,25 @@ export class MinionDisplayComponent {
     pupil.setAttribute('r', eye.eyeRadius.toString());
   }
 
-  private setTrouthers(onlyUnderwear: boolean, skinColor: string): void {
-    if (onlyUnderwear) {
-      this.svg.getElementById('shirtSlapRight').remove();
-      this.svg.getElementById('shirtSlapLeft').remove();
-      if (this.svg.getElementById('pocket')) {
-        this.svg.getElementById('pocket').remove();
-      }
-      this.svg.getElementById('shirt').remove();
-      this.svg.getElementById('underwear').style.fill = 'white';
-      this.svg.getElementById('legs').style.fill = skinColor;
+  private setCloth(cloth: number, skinColor: string): void {
+    switch (cloth) {
+      case 0:
+        // this.svg.getElementById('underwear').remove();
+        this.svg.getElementById('fancyDress').remove();
+        this.svg.getElementById('workingCloth').remove();
+        break;
+      case 1:
+        this.svg.getElementById('underwear').remove();
+        // this.svg.getElementById('fancyDress').remove();
+        this.svg.getElementById('workingCloth').remove();
+        break;
+      case 2:
+        this.svg.getElementById('underwear').remove();
+        this.svg.getElementById('fancyDress').remove();
+        // this.svg.getElementById('workingCloth').remove();
+        break;
+      default:
+        console.log(`cloth ${cloth} unknown.`);
     }
   }
 

@@ -156,16 +156,26 @@ export class MinionDisplayComponent {
     switch (hair) {
       case 0:
         this.svg.getElementById('hairSpiked').remove();
+        this.svg.getElementById('hairSpikedShort').remove();
         this.svg.getElementById('hairSprout').remove();
         break;
       case 1:
+        // this.svg.getElementById('hairSpiked').remove();
+        this.svg.getElementById('hairSpikedShort').remove();
         this.svg.getElementById('hairSprout').remove();
         break;
       case 2:
         this.svg.getElementById('hairSpiked').remove();
+        // this.svg.getElementById('hairSpikedShort').remove();
+        this.svg.getElementById('hairSprout').remove();
+        break;
+      case 3:
+        this.svg.getElementById('hairSpiked').remove();
+        this.svg.getElementById('hairSpikedShort').remove();
+        // this.svg.getElementById('hairSprout').remove();
         break;
       default:
-        console.log(`Hair ${hair} unkown.`);
+        console.log(`Hair ${hair} unknown.`);
     }
   }
 

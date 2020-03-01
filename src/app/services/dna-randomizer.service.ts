@@ -30,9 +30,13 @@ export class DnaRandomizerService {
     dna.hairType = this.chance.integer({ min: 0, max: 2 });
     dna.twoEyes = this.chance.bool({ likelihood: 80 });
     dna.onlyUnderwear = this.chance.bool({ likelihood: 3 });
-    dna.holdsItem = this.chance.bool({ likelihood: 20 });
-    if (dna.holdsItem) {
-      dna.itemInHand = this.chance.integer({ min: 1, max: 4 });
+    dna.leftHandHoldsItem = this.chance.bool({ likelihood: 20 });
+    if (dna.leftHandHoldsItem) {
+      dna.leftHandItem = this.chance.integer({ min: 1, max: 4 });
+    }
+    dna.rightHandHoldsItem = this.chance.bool({ likelihood: 20 });
+    if (dna.rightHandHoldsItem) {
+      dna.rightHandItem = this.chance.integer({ min: 1, max: 4 });
     }
 
     const irisRadius = this.chance.floating({ min: 2, max: 5 });

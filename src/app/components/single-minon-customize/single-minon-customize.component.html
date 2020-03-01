@@ -29,9 +29,13 @@
 
   <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.gloves">Gloves</mat-checkbox><br />
   <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.shoes">Shoes</mat-checkbox><br />
-  <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.holdsItem">Item</mat-checkbox><br />
-  <div *ngIf="minionDna.holdsItem">
-    <mat-slider [(value)]="minionDna.itemInHand" min="1" max="4" (change)="triggerUpdate()" [step]="1"></mat-slider>
+  <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.leftHandHoldsItem">Left Hand Item</mat-checkbox><br />
+  <div *ngIf="minionDna.leftHandHoldsItem">
+    <mat-slider [(value)]="minionDna.leftHandItem" min="1" max="4" (change)="triggerUpdate()" [step]="1"></mat-slider>
+  </div>
+  <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.rightHandHoldsItem">Right Hand Item</mat-checkbox><br />
+  <div *ngIf="minionDna.rightHandHoldsItem">
+    <mat-slider [(value)]="minionDna.rightHandItem" min="1" max="4" (change)="triggerUpdate()" [step]="1"></mat-slider>
   </div>
   <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.onlyUnderwear">Underwear</mat-checkbox><br />
   <div *ngIf="!minionDna.onlyUnderwear">

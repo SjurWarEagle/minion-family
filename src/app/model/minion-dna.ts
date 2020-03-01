@@ -17,8 +17,10 @@ export class MinionDna {
   public shoes: boolean;
   public skinColor: number;
   public hairType: number;
-  public holdsItem: boolean;
-  public itemInHand: number;
+  public leftHandHoldsItem: boolean;
+  public leftHandItem: number;
+  public rightHandHoldsItem: boolean;
+  public rightHandItem: number;
   /**
    * The way the mouth is formed
    */

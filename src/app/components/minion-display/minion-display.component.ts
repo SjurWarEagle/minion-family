@@ -29,6 +29,7 @@ export class MinionDisplayComponent {
     this.minionDna = minionDna;
     this.renderData();
   }
+
   private svg: HTMLElement | any;
 
   private ids = {
@@ -83,7 +84,8 @@ export class MinionDisplayComponent {
     this.setSkinColor(skinColor);
     this.setHair(this.minionDna.hairType);
     this.setTrouthers(this.minionDna.onlyUnderwear, skinColor);
-    this.setItemInHand(this.minionDna.holdsItem, this.minionDna.itemInHand);
+    this.setItemInHands('leftHand', this.minionDna.leftHandHoldsItem, this.minionDna.leftHandItem);
+    this.setItemInHands('rightHand', this.minionDna.rightHandHoldsItem, this.minionDna.rightHandItem);
   }
 
   private setMouth(element, mood: number) {
@@ -196,37 +198,37 @@ export class MinionDisplayComponent {
     // console.log(svg.getElementById('singleEyePupilPart1'));
   }
 
-  private setItemInHand(holdsItem: boolean, itemInHand: number) {
+  private setItemInHands(hand: string, holdsItem: boolean, itemInHand: number) {
     if (!holdsItem) {
-      this.svg.getElementById('banana').remove();
-      this.svg.getElementById('wrench').remove();
-      this.svg.getElementById('hammer').remove();
-      this.svg.getElementById('router').remove();
+      this.svg.getElementById(`${hand}Banana`).remove();
+      this.svg.getElementById(`${hand}Wrench`).remove();
+      this.svg.getElementById(`${hand}Hammer`).remove();
+      this.svg.getElementById(`${hand}Router`).remove();
     } else {
       switch (itemInHand) {
         case 1:
-          // this.svg.getElementById('banana').remove();
-          this.svg.getElementById('hammer').remove();
-          this.svg.getElementById('wrench').remove();
-          this.svg.getElementById('router').remove();
+          // this.svg.getElementById(`${hand}Banana`).remove();
+          this.svg.getElementById(`${hand}Wrench`).remove();
+          this.svg.getElementById(`${hand}Hammer`).remove();
+          this.svg.getElementById(`${hand}Router`).remove();
           break;
         case 2:
-          this.svg.getElementById('banana').remove();
-          // this.svg.getElementById('hammer').remove();
-          this.svg.getElementById('wrench').remove();
-          this.svg.getElementById('router').remove();
+          this.svg.getElementById(`${hand}Banana`).remove();
+          // this.svg.getElementById(`${hand}Wrench`).remove();
+          this.svg.getElementById(`${hand}Hammer`).remove();
+          this.svg.getElementById(`${hand}Router`).remove();
           break;
         case 3:
-          this.svg.getElementById('banana').remove();
-          this.svg.getElementById('hammer').remove();
-          // this.svg.getElementById('wrench').remove();
-          this.svg.getElementById('router').remove();
+          this.svg.getElementById(`${hand}Banana`).remove();
+          this.svg.getElementById(`${hand}Wrench`).remove();
+          // this.svg.getElementById(`${hand}Hammer`).remove();
+          this.svg.getElementById(`${hand}Router`).remove();
           break;
         case 4:
-          this.svg.getElementById('banana').remove();
-          this.svg.getElementById('hammer').remove();
-          this.svg.getElementById('wrench').remove();
-          // this.svg.getElementById('router').remove();
+          this.svg.getElementById(`${hand}Banana`).remove();
+          this.svg.getElementById(`${hand}Wrench`).remove();
+          this.svg.getElementById(`${hand}Hammer`).remove();
+          // this.svg.getElementById(`${hand}Router`).remove();
           break;
       }
     }

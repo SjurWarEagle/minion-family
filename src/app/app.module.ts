@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,7 +16,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,17 +30,17 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   imports: [
     BrowserModule, //
+    BrowserAnimationsModule,
+    MatSliderModule,
     FormsModule,
-    AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
-    BrowserAnimationsModule,
     MatButtonToggleModule,
-    MatSliderModule,
     MatCheckboxModule,
     MatIconModule,
     MatMenuModule,
     MatButtonModule,
+    AppRoutingModule,
     MatFormFieldModule
   ],
   providers: [],

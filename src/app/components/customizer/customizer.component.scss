@@ -1,4 +1,6 @@
 .all {
+  //border-style: dotted;
+  //border-color: gray;
   width: 100%;
   height: 100%;
   display: grid;
@@ -8,8 +10,15 @@
 
 .config {
   margin: 2em;
+  //border-style: dotted;
+  //border-color: gray;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .display {
-  width: 25vw;
+  //border-style: dotted;
+  //border-color: gray;
+  max-width: 95%;
+  max-height: 95%;
 }

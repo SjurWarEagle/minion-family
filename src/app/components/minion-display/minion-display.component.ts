@@ -13,6 +13,9 @@ export class MinionDisplayComponent {
   @ViewChild('dataContainer', { static: true })
   public dataContainer: ElementRef;
 
+  @ViewChild('container', { static: true })
+  public container: ElementRef;
+
   private _svgContent: string;
   private minionDna: MinionDna;
 
@@ -49,7 +52,9 @@ export class MinionDisplayComponent {
       this.minionDna = await this.dnaRandomizerService.generateMinion({ allowColoredEyes: true });
     }
     // const svgSize = 'calc(100% - 1.5em)';
-    const svgSize = '100%';
+    const tmp = (this.container.nativeElement as HTMLElement) as HTMLElement | any;
+
+    const svgSize = Math.min(tmp.getBoundingClientRect().height, tmp.getBoundingClientRect().width) + 'px';
     this.svg.setAttribute('height', svgSize);
     this.svg.setAttribute('width', svgSize);
 

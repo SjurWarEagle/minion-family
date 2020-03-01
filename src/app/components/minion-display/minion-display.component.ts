@@ -158,21 +158,31 @@ export class MinionDisplayComponent {
         this.svg.getElementById('hairSpiked').remove();
         this.svg.getElementById('hairSpikedShort').remove();
         this.svg.getElementById('hairSprout').remove();
+        this.svg.getElementById('hairSleek').remove();
         break;
       case 1:
         // this.svg.getElementById('hairSpiked').remove();
         this.svg.getElementById('hairSpikedShort').remove();
         this.svg.getElementById('hairSprout').remove();
+        this.svg.getElementById('hairSleek').remove();
         break;
       case 2:
         this.svg.getElementById('hairSpiked').remove();
         // this.svg.getElementById('hairSpikedShort').remove();
         this.svg.getElementById('hairSprout').remove();
+        this.svg.getElementById('hairSleek').remove();
         break;
       case 3:
         this.svg.getElementById('hairSpiked').remove();
         this.svg.getElementById('hairSpikedShort').remove();
         // this.svg.getElementById('hairSprout').remove();
+        this.svg.getElementById('hairSleek').remove();
+        break;
+      case 4:
+        this.svg.getElementById('hairSpiked').remove();
+        this.svg.getElementById('hairSpikedShort').remove();
+        this.svg.getElementById('hairSprout').remove();
+        // this.svg.getElementById('hairSleek').remove();
         break;
       default:
         console.log(`Hair ${hair} unknown.`);

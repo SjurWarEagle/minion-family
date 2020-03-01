@@ -39,7 +39,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     const size = this.allMinions.nativeElement.getBoundingClientRect();
     // console.log('allMinions size', size);
     const cols = Math.floor(size.width / sizeMinion.width);
-    const rows = Math.floor(size.height / (sizeMinion.height + 25));
+    const rows = Math.floor(size.height / sizeMinion.height);
     const cnt = cols * rows;
     // console.log('cols', cols);
     // console.log('rows', rows);

@@ -25,7 +25,7 @@
   </div>
 
   <mat-label>Mood:</mat-label>
-  <mat-slider [(value)]="minionDna.mood" min="-50" max="100" (change)="triggerUpdate()" [step]="1"></mat-slider>
+  <mat-slider [(value)]="minionDna.mood" min="-75" max="100" (change)="triggerUpdate()" [step]="1"></mat-slider>
 
   <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.gloves">Gloves</mat-checkbox><br />
   <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.shoes">Shoes</mat-checkbox><br />

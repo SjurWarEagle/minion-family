@@ -48,7 +48,8 @@ export class MinionDisplayComponent {
     if (!this.minionDna) {
       this.minionDna = await this.dnaRandomizerService.generateMinion({ allowColoredEyes: true });
     }
-    const svgSize = 'calc(100% - 1.5em)';
+    // const svgSize = 'calc(100% - 1.5em)';
+    const svgSize = '100%';
     this.svg.setAttribute('height', svgSize);
     this.svg.setAttribute('width', svgSize);
 

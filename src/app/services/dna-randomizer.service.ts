@@ -50,13 +50,13 @@ export class DnaRandomizerService {
     dna.twoEyes = this.chance.bool({ likelihood: 80 });
     dna.leftHandHoldsItem = this.chance.bool({ likelihood: 20 });
     if (dna.leftHandHoldsItem) {
-      dna.leftHandItem = this.chance.integer({ min: 1, max: 4 });
+      dna.leftHandItem = this.chance.integer({ min: 1, max: 5 });
     } else {
       dna.leftHandItem = 1;
     }
     dna.rightHandHoldsItem = this.chance.bool({ likelihood: 20 });
     if (dna.rightHandHoldsItem) {
-      dna.rightHandItem = this.chance.integer({ min: 1, max: 4 });
+      dna.rightHandItem = this.chance.integer({ min: 1, max: 5 });
     } else {
       dna.rightHandItem = 1;
     }

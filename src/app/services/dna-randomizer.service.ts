@@ -18,6 +18,27 @@ export class DnaRandomizerService {
 
   constructor() {}
 
+  private getItemInHandHand(): number {
+    const rnd = this.chance.integer({ min: 0, max: 100 });
+    let rc = 0;
+
+    if (rnd <= 55) {
+      rc = 0;
+    } else if (rnd <= 68) {
+      rc = 1;
+    } else if (rnd <= 78) {
+      rc = 2;
+    } else if (rnd <= 88) {
+      rc = 3;
+    } else if (rnd <= 98) {
+      rc = 4;
+    } else {
+      rc = 5;
+    }
+
+    return rc;
+  }
+
   private generateCloth(dna: MinionDna): void {
     const rnd = this.chance.integer({ min: 0, max: 100 });
     let cloth = 0;
@@ -46,20 +67,10 @@ export class DnaRandomizerService {
     dna.hairType = this.chance.integer({ min: 0, max: 4 });
 
     this.generateCloth(dna);
+    dna.leftHandItem = this.getItemInHandHand();
+    dna.rightHandItem = this.getItemInHandHand();
 
     dna.twoEyes = this.chance.bool({ likelihood: 80 });
-    dna.leftHandHoldsItem = this.chance.bool({ likelihood: 20 });
-    if (dna.leftHandHoldsItem) {
-      dna.leftHandItem = this.chance.integer({ min: 1, max: 5 });
-    } else {
-      dna.leftHandItem = 1;
-    }
-    dna.rightHandHoldsItem = this.chance.bool({ likelihood: 20 });
-    if (dna.rightHandHoldsItem) {
-      dna.rightHandItem = this.chance.integer({ min: 1, max: 5 });
-    } else {
-      dna.rightHandItem = 1;
-    }
 
     const irisRadius = this.chance.floating({ min: 2, max: 5 });
     const eyeRadius = this.chance.floating({ min: 15, max: 22 });

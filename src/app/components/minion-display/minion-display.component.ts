@@ -92,8 +92,8 @@ export class MinionDisplayComponent {
     this.setSkinColor(skinColor);
     this.setHair(this.minionDna.hairType);
     this.setCloth(this.minionDna.cloths, skinColor);
-    this.setItemInHands('leftHand', this.minionDna.leftHandHoldsItem, this.minionDna.leftHandItem);
-    this.setItemInHands('rightHand', this.minionDna.rightHandHoldsItem, this.minionDna.rightHandItem);
+    this.setItemInHands('leftHand', this.minionDna.leftHandItem);
+    this.setItemInHands('rightHand', this.minionDna.rightHandItem);
   }
 
   private setMouth(element, mood: number) {
@@ -236,51 +236,50 @@ export class MinionDisplayComponent {
     // console.log(svg.getElementById('singleEyePupilPart1'));
   }
 
-  private setItemInHands(hand: string, holdsItem: boolean, itemInHand: number) {
-    if (!holdsItem) {
-      this.svg.getElementById(`${hand}Banana`).remove();
-      this.svg.getElementById(`${hand}Wrench`).remove();
-      this.svg.getElementById(`${hand}Hammer`).remove();
-      this.svg.getElementById(`${hand}Router`).remove();
-      this.svg.getElementById(`${hand}Teddy`).remove();
-    } else {
-      switch (itemInHand) {
-        case 1:
-          // this.svg.getElementById(`${hand}Banana`).remove();
-          this.svg.getElementById(`${hand}Wrench`).remove();
-          this.svg.getElementById(`${hand}Hammer`).remove();
-          this.svg.getElementById(`${hand}Router`).remove();
-          this.svg.getElementById(`${hand}Teddy`).remove();
-          break;
-        case 2:
-          this.svg.getElementById(`${hand}Banana`).remove();
-          // this.svg.getElementById(`${hand}Wrench`).remove();
-          this.svg.getElementById(`${hand}Hammer`).remove();
-          this.svg.getElementById(`${hand}Router`).remove();
-          this.svg.getElementById(`${hand}Teddy`).remove();
-          break;
-        case 3:
-          this.svg.getElementById(`${hand}Banana`).remove();
-          this.svg.getElementById(`${hand}Wrench`).remove();
-          // this.svg.getElementById(`${hand}Hammer`).remove();
-          this.svg.getElementById(`${hand}Router`).remove();
-          this.svg.getElementById(`${hand}Teddy`).remove();
-          break;
-        case 4:
-          this.svg.getElementById(`${hand}Banana`).remove();
-          this.svg.getElementById(`${hand}Wrench`).remove();
-          this.svg.getElementById(`${hand}Hammer`).remove();
-          // this.svg.getElementById(`${hand}Router`).remove();
-          this.svg.getElementById(`${hand}Teddy`).remove();
-          break;
-        case 5:
-          this.svg.getElementById(`${hand}Banana`).remove();
-          this.svg.getElementById(`${hand}Wrench`).remove();
-          this.svg.getElementById(`${hand}Hammer`).remove();
-          this.svg.getElementById(`${hand}Router`).remove();
-          // this.svg.getElementById(`${hand}Teddy`).remove();
-          break;
-      }
+  private setItemInHands(hand: string, itemInHand: number) {
+    switch (itemInHand) {
+      case 0:
+        this.svg.getElementById(`${hand}Banana`).remove();
+        this.svg.getElementById(`${hand}Wrench`).remove();
+        this.svg.getElementById(`${hand}Hammer`).remove();
+        this.svg.getElementById(`${hand}Router`).remove();
+        this.svg.getElementById(`${hand}Teddy`).remove();
+        break;
+      case 1:
+        // this.svg.getElementById(`${hand}Banana`).remove();
+        this.svg.getElementById(`${hand}Wrench`).remove();
+        this.svg.getElementById(`${hand}Hammer`).remove();
+        this.svg.getElementById(`${hand}Router`).remove();
+        this.svg.getElementById(`${hand}Teddy`).remove();
+        break;
+      case 2:
+        this.svg.getElementById(`${hand}Banana`).remove();
+        // this.svg.getElementById(`${hand}Wrench`).remove();
+        this.svg.getElementById(`${hand}Hammer`).remove();
+        this.svg.getElementById(`${hand}Router`).remove();
+        this.svg.getElementById(`${hand}Teddy`).remove();
+        break;
+      case 3:
+        this.svg.getElementById(`${hand}Banana`).remove();
+        this.svg.getElementById(`${hand}Wrench`).remove();
+        // this.svg.getElementById(`${hand}Hammer`).remove();
+        this.svg.getElementById(`${hand}Router`).remove();
+        this.svg.getElementById(`${hand}Teddy`).remove();
+        break;
+      case 4:
+        this.svg.getElementById(`${hand}Banana`).remove();
+        this.svg.getElementById(`${hand}Wrench`).remove();
+        this.svg.getElementById(`${hand}Hammer`).remove();
+        // this.svg.getElementById(`${hand}Router`).remove();
+        this.svg.getElementById(`${hand}Teddy`).remove();
+        break;
+      case 5:
+        this.svg.getElementById(`${hand}Banana`).remove();
+        this.svg.getElementById(`${hand}Wrench`).remove();
+        this.svg.getElementById(`${hand}Hammer`).remove();
+        this.svg.getElementById(`${hand}Router`).remove();
+        // this.svg.getElementById(`${hand}Teddy`).remove();
+        break;
     }
   }
 }

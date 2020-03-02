@@ -24,15 +24,15 @@ export class DnaRandomizerService {
 
     if (rnd <= 55) {
       rc = 0;
-    } else if (rnd <= 65) {
+    } else if (rnd <= 73) {
       rc = 1;
-    } else if (rnd <= 75) {
+    } else if (rnd <= 83) {
       rc = 2;
-    } else if (rnd <= 85) {
+    } else if (rnd <= 93) {
       rc = 3;
-    } else if (rnd <= 96) {
+    } else if (rnd <= 95) {
       rc = 6;
-    } else if (rnd <= 98) {
+    } else if (rnd <= 97) {
       rc = 4;
     } else {
       rc = 5;

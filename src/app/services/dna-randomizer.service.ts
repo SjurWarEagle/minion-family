@@ -24,12 +24,14 @@ export class DnaRandomizerService {
 
     if (rnd <= 55) {
       rc = 0;
-    } else if (rnd <= 68) {
+    } else if (rnd <= 65) {
       rc = 1;
-    } else if (rnd <= 78) {
+    } else if (rnd <= 75) {
       rc = 2;
-    } else if (rnd <= 88) {
+    } else if (rnd <= 85) {
       rc = 3;
+    } else if (rnd <= 96) {
+      rc = 6;
     } else if (rnd <= 98) {
       rc = 4;
     } else {

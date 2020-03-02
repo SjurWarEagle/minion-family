@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faTh, faTools } from '@fortawesome/free-solid-svg-icons';
+import { faTh, faTools, faCloudDownloadAlt } from '@fortawesome/free-solid-svg-icons';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,18 @@ import { faTh, faTools } from '@fortawesome/free-solid-svg-icons';
 export class AppComponent implements OnInit {
   public minionWallIcon = faTh;
   public minionCustomizerIcon = faTools;
+  public export = faCloudDownloadAlt;
 
   public ngOnInit(): void {}
 
   constructor() {}
+
+  public downloadAsImage() {
+    html2canvas(document.getElementById('areaToExport')).then(canvas => {
+      let link = document.createElement('a');
+      link.download = 'minion.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  }
 }

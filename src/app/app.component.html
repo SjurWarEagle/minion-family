@@ -8,6 +8,11 @@
   </button>
   <button mat-menu-item routerLink="customizer">
     <fa-icon [icon]="minionCustomizerIcon"></fa-icon><span class="action-label">Customize</span>
+
+  </button>
+  <button mat-menu-item (click)="downloadAsImage()">
+<!--    <fa-icon [icon]="minionCustomizerIcon"></fa-icon><span class="action-label">Customize</span>-->
+    <fa-icon [icon]="export"></fa-icon><span class="action-label">Export</span>
   </button>
 </mat-menu>
 

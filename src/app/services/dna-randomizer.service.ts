@@ -19,26 +19,7 @@ export class DnaRandomizerService {
   constructor() {}
 
   private getItemInHandHand(): number {
-    const rnd = this.chance.integer({ min: 0, max: 100 });
-    let rc = 0;
-
-    if (rnd <= 55) {
-      rc = 0;
-    } else if (rnd <= 73) {
-      rc = 1;
-    } else if (rnd <= 83) {
-      rc = 2;
-    } else if (rnd <= 93) {
-      rc = 3;
-    } else if (rnd <= 95) {
-      rc = 6;
-    } else if (rnd <= 97) {
-      rc = 4;
-    } else {
-      rc = 5;
-    }
-
-    return rc;
+    return this.chance.weighted([0, 1, 2, 3, 4, 5, 6], [60, 10, 10, 10, 2, 2, 2]);
   }
 
   private generateCloth(dna: MinionDna): void {

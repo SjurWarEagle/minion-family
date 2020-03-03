@@ -7,7 +7,7 @@ import * as chroma from 'chroma-js';
 @Component({
   selector: 'app-minion-display',
   templateUrl: './minion-display.component.html',
-  styleUrls: ['./minion-display.component.scss']
+  styleUrls: ['./minion-display.component.scss'],
 })
 export class MinionDisplayComponent {
   @ViewChild('dataContainer', { static: true })
@@ -36,7 +36,7 @@ export class MinionDisplayComponent {
   private svg: HTMLElement | any;
 
   private ids = {
-    eyeRadiant: ''
+    eyeRadiant: '',
   };
 
   constructor(private dnaRandomizerService: DnaRandomizerService) {}

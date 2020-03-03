@@ -3,7 +3,7 @@ import { FamilyTree } from '../model/family-tree';
 import { DnaRandomizerService } from './dna-randomizer.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TreeGeneratorService {
   constructor(private dnaRandomizerService: DnaRandomizerService) {}

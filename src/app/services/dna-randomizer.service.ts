@@ -5,7 +5,7 @@ import * as chroma from 'chroma-js';
 import { DnaGenerationParameters } from '../model/dna-generation-parameter';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 /**
  * Generates the DNA for a minion by random values.
@@ -79,21 +79,21 @@ export class DnaRandomizerService {
       pupilShift: irisShift,
       irisRadius: irisRadius,
       color: color,
-      eyeRadius: eyeRadius
+      eyeRadius: eyeRadius,
     };
 
     dna.eyeRight = {
       pupilShift: -irisShift,
       irisRadius: irisRadius,
       color: color,
-      eyeRadius: eyeRadius
+      eyeRadius: eyeRadius,
     };
 
     dna.eye = {
       pupilShift: irisShift,
       irisRadius: irisRadius,
       color: color,
-      eyeRadius: eyeRadius
+      eyeRadius: eyeRadius,
     };
 
     return dna;

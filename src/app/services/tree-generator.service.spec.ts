@@ -15,7 +15,7 @@ describe('Family generator', () => {
     expect(minion).toBeDefined();
   });
 
-  it('generate something', async done => {
+  it('generate something', async (done) => {
     const minion = dnaRandomizerService.generateMinion();
     expect(minion).toBeDefined();
     let familyTree = await treeGeneratorService.generate(0, 1);

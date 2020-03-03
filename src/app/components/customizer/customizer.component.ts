@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-customizer',
   templateUrl: './customizer.component.html',
-  styleUrls: ['./customizer.component.scss']
+  styleUrls: ['./customizer.component.scss'],
 })
 export class CustomizerComponent implements OnInit {
   public currentMinionDna: MinionDna;
@@ -16,7 +16,7 @@ export class CustomizerComponent implements OnInit {
 
   public ngOnInit(): void {
     this.loadImage().then(() => {
-      this.dnaRandomizerService.generateMinion().then(dna => {
+      this.dnaRandomizerService.generateMinion().then((dna) => {
         this.currentMinionDna = dna;
       });
     });
@@ -29,7 +29,7 @@ export class CustomizerComponent implements OnInit {
     const content = await this.http
       .get('./assets/minions-svgrepo-com.svg', {
         headers,
-        responseType: 'text'
+        responseType: 'text',
       })
       .toPromise();
     // console.log('content=', content);

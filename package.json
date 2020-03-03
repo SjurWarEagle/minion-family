@@ -30,8 +30,8 @@
     "@fortawesome/free-solid-svg-icons": "5.12.1",
     "chance": "1.1.4",
     "chroma-js": "2.1.0",
-    "gsap": "3.2.2",
-    "npm-check-updates": "^4.0.2",
+    "gsap": "3.2.4",
+    "npm-check-updates": "^4.0.3",
     "rxjs": "6.5.4",
     "html2canvas": "1.0.0-rc.5",
     "tslib": "1.11.1",
@@ -70,9 +70,11 @@
   "prettier": {
     "printWidth": 120,
     "singleQuote": true,
+    "trailingComma": true,
     "useTabs": false,
     "tabWidth": 2,
     "semi": true,
-    "bracketSpacing": true
+    "bracketSpacing": true,
+    "arrowParens": "always"
   }
 }

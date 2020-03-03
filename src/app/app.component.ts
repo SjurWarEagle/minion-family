@@ -5,7 +5,7 @@ import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   public minionWallIcon = faTh;
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
   public downloadAsImage() {
     this.loading = true;
-    html2canvas(document.getElementById('areaToExport')).then(canvas => {
+    html2canvas(document.getElementById('areaToExport')).then((canvas) => {
       let link = document.createElement('a');
       link.download = 'minion.png';
       link.href = canvas.toDataURL('image/png');

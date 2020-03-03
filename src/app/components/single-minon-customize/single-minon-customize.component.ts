@@ -4,7 +4,7 @@ import { MinionDna } from '../../model/minion-dna';
 @Component({
   selector: 'app-single-minon-customize',
   templateUrl: './single-minon-customize.component.html',
-  styleUrls: ['./single-minon-customize.component.scss']
+  styleUrls: ['./single-minon-customize.component.scss'],
 })
 export class SingleMinonCustomizeComponent implements OnInit {
   @Input()

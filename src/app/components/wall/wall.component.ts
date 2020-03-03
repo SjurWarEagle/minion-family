@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-wall',
   templateUrl: './wall.component.html',
-  styleUrls: ['./wall.component.scss']
+  styleUrls: ['./wall.component.scss'],
 })
 export class WallComponent implements OnInit, AfterViewInit {
   @ViewChild('all', { static: false })
@@ -58,7 +58,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     const content = await this.http
       .get('./assets/minions-svgrepo-com.svg', {
         headers,
-        responseType: 'text'
+        responseType: 'text',
       })
       .toPromise();
     // console.log('content=', content);

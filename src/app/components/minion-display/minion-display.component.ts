@@ -54,10 +54,16 @@ export class MinionDisplayComponent {
     // const svgSize = 'calc(100% - 1.5em)';
     const tmp = (this.container.nativeElement as HTMLElement) as HTMLElement | any;
 
-    const svgSize = Math.min(tmp.getBoundingClientRect().height, tmp.getBoundingClientRect().width) + 'px';
-    this.svg.setAttribute('height', svgSize);
-    this.svg.setAttribute('width', svgSize);
+    // const svgSize = Math.min(tmp.getBoundingClientRect().height, tmp.getBoundingClientRect().width) + 'px';
+    // console.log('svgSize', svgSize);
+    this.svg.setAttribute('height', tmp.getBoundingClientRect().height);
+    this.svg.setAttribute('width', tmp.getBoundingClientRect().width);
 
+    // const svgSize = Math.min(tmp.getBoundingClientRect().height, tmp.getBoundingClientRect().width) + 'px';
+    // console.log('svgSize', svgSize);
+    // this.svg.setAttribute('height', svgSize);
+    // this.svg.setAttribute('width', svgSize);
+    //
     // minion original color: fce029
     const colorScale = chroma.scale(['fce029', 'fcc629']).domain([0, 100]);
     const skinColor = colorScale(this.minionDna.skinColor).hex();

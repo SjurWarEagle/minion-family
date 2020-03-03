@@ -1,0 +1,38 @@
+<form class="config">
+  <mat-form-field class="example-full-width">
+    <mat-label>Width Pixel</mat-label>
+    <input name="pixelWidth" matInput value="1024" type="number" min="500" [(ngModel)]="pixelWidth" (change)="resetMinions()">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Height Pixel</mat-label>
+    <input name="pixelHeight" matInput value="768" type="number" min="500" [(ngModel)]="pixelHeight" (change)="resetMinions()">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Nr Minions Height</mat-label>
+    <input name="nrMinionsHeight" matInput value="5" type="number" min="1" [(ngModel)]="nrMinionsHeight" (change)="resetMinions()">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Nr Minions Width</mat-label>
+    <input name="nrMinionsWidth" matInput value="5" type="number" min="1" [(ngModel)]="nrMinionsWidth" (change)="resetMinions()">
+  </mat-form-field>
+</form>
+
+<div
+  style="border-color: gray; border-style: dotted; margin: 0"
+  [style.height.px]="pixelHeight"
+  [style.width.px]="pixelWidth"
+>
+  <div class="lists" #all id="areaToExport"
+  *ngIf="cntArray">
+    <div *ngFor="let nr of cntArray" class="minionArea"
+         [style.height.px]="sizeOfMinionHeight"
+         [style.width.px]="sizeOfMinionWidth"
+    >
+      <app-minion-display [svgContent]="svgContent"></app-minion-display>
+    </div>
+  </div>
+
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faTh, faTools, faCloudDownloadAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTh, faTools, faCloudDownloadAlt, faExpand } from '@fortawesome/free-solid-svg-icons';
 import html2canvas from 'html2canvas';
 
 @Component({
@@ -9,6 +9,7 @@ import html2canvas from 'html2canvas';
 })
 export class AppComponent implements OnInit {
   public minionWallIcon = faTh;
+  public minionPosterIcon = faExpand;
   public minionCustomizerIcon = faTools;
   public export = faCloudDownloadAlt;
   public loading = false;

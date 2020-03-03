@@ -20,6 +20,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { LoadingIndicatorComponent } from './components/loading-indicator/loading-indicator.component';
+import { PosterComponent } from './components/poster/poster.component';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -27,8 +29,9 @@ import { LoadingIndicatorComponent } from './components/loading-indicator/loadin
     MinionDisplayComponent,
     CustomizerComponent,
     WallComponent,
+    PosterComponent,
     SingleMinonCustomizeComponent,
-    LoadingIndicatorComponent
+    LoadingIndicatorComponent,
   ],
   imports: [
     BrowserModule, //
@@ -41,14 +44,15 @@ import { LoadingIndicatorComponent } from './components/loading-indicator/loadin
     MatCheckboxModule,
     MatIconModule,
     MatMenuModule,
+    MatInputModule,
     MatButtonModule,
     AppRoutingModule,
-    MatFormFieldModule
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [
-    AppComponent //
-  ]
+    AppComponent, //
+  ],
 })
 export class AppModule {
   constructor(private library: FaIconLibrary) {

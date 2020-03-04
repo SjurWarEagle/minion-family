@@ -10,9 +10,12 @@ export class WallComponent implements OnInit, AfterViewInit {
   @ViewChild('all', { static: false })
   public allMinions: ElementRef;
 
-  @ViewChild('minionArea', { static: false })
-  public firstMinion: ElementRef;
+  public minionSizeToUse: number = 200;
 
+  public pixelHeight: number = 768;
+  public pixelWidth: number = 1024;
+  public nrMinionsHeight: number = 5;
+  public nrMinionsWidth: number = 5;
   public svgContent: string;
 
   public nrMinions = [1];
@@ -29,18 +32,16 @@ export class WallComponent implements OnInit, AfterViewInit {
 
   @HostListener('window:resize')
   public recalc(): void {
-    if (!this.firstMinion) {
+    if (!this.allMinions || !this.allMinions.nativeElement) {
       return;
     }
-    // console.log('this.minions', this.firstMinion);
-    const sizeMinion = this.firstMinion.nativeElement.getBoundingClientRect();
-    // console.log('sizeMinion', sizeMinion);
-
     const size = this.allMinions.nativeElement.getBoundingClientRect();
+    this.pixelHeight = size.height;
+    this.pixelWidth = size.width;
     // console.log('allMinions size', size);
-    const cols = Math.floor(size.width / sizeMinion.width);
-    const rows = Math.floor(size.height / sizeMinion.height);
-    const cnt = cols * rows;
+    this.nrMinionsWidth = Math.floor(size.width / this.minionSizeToUse);
+    this.nrMinionsHeight = Math.floor(size.height / this.minionSizeToUse);
+    const cnt = this.nrMinionsWidth * this.nrMinionsHeight;
     // console.log('cols', cols);
     // console.log('rows', rows);
     // console.log('cnt', cnt);

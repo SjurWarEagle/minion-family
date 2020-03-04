@@ -12,27 +12,16 @@ export class PosterComponent implements OnInit {
   public nrMinionsHeight: number = 5;
   public nrMinionsWidth: number = 5;
   public svgContent: string;
-  public sizeOfMinionHeight: number = 200;
-  public sizeOfMinionWidth: number = 200;
-  public cntArray: number[] = [0];
 
   constructor(private http: HttpClient) {}
 
-  public ngOnInit(): void {
-    this.loadImage().then(() => {
-      this.resetMinions();
-    });
+  public resetMinions(): void {
+    //todo
   }
 
-  private resetMinions(): void {
-    this.cntArray = undefined;
-    setTimeout(() => {
-      const tmpCounter = this.nrMinionsHeight * this.nrMinionsWidth;
-      this.cntArray = Array(tmpCounter)
-        .fill(0)
-        .map((x, i) => i);
-      this.sizeOfMinionHeight = this.pixelHeight / this.nrMinionsHeight;
-      this.sizeOfMinionWidth = this.pixelWidth / this.nrMinionsWidth;
+  public ngOnInit(): void {
+    this.loadImage().then(() => {
+      //
     });
   }
 

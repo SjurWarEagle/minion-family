@@ -1,0 +1,16 @@
+<div
+  style="margin: 0"
+  [style.height.px]="pixelHeight"
+  [style.width.px]="pixelWidth"
+>
+  <div class="lists" #all id="areaToExport"
+       *ngIf="cntArray">
+    <div *ngFor="let nr of cntArray" class="minionArea"
+         [style.height.px]="sizeOfMinionHeight"
+         [style.width.px]="sizeOfMinionWidth"
+    >
+      <app-minion-display [svgContent]="svgContent"></app-minion-display>
+    </div>
+  </div>
+
+</div>

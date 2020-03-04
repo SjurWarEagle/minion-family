@@ -1,5 +1,13 @@
-<div class="lists" #all id="areaToExport">
-  <div *ngFor="let nr of nrMinions" #minionArea class="minionArea">
-    <app-minion-display [svgContent]="svgContent"></app-minion-display>
-  </div>
+<div
+  #all
+  class="all"
+>
+
+  <app-minion-panel
+    [svgContent]="svgContent"
+    [nrMinionsHeight]="nrMinionsHeight"
+    [nrMinionsWidth]="nrMinionsWidth"
+    [pixelHeight]="pixelHeight"
+    [pixelWidth]="pixelWidth"
+  ></app-minion-panel>
 </div>

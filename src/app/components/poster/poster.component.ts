@@ -31,7 +31,6 @@ export class PosterComponent implements OnInit {
       this.cntArray = Array(tmpCounter)
         .fill(0)
         .map((x, i) => i);
-      // this.sizeOfMinion = Math.max(this.pixelHeight / this.nrMinionsHeight, this.pixelWidth / this.nrMinionsWidth);
       this.sizeOfMinionHeight = this.pixelHeight / this.nrMinionsHeight;
       this.sizeOfMinionWidth = this.pixelWidth / this.nrMinionsWidth;
     });

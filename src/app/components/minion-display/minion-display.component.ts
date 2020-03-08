@@ -172,16 +172,25 @@ export class MinionDisplayComponent {
         // this.svg.getElementById('underwear').remove();
         this.svg.getElementById('fancyDress').remove();
         this.svg.getElementById('workingCloth').remove();
+        this.svg.getElementById('hawaii').remove();
         break;
       case 1:
         this.svg.getElementById('underwear').remove();
         // this.svg.getElementById('fancyDress').remove();
         this.svg.getElementById('workingCloth').remove();
+        this.svg.getElementById('hawaii').remove();
         break;
       case 2:
         this.svg.getElementById('underwear').remove();
         this.svg.getElementById('fancyDress').remove();
         // this.svg.getElementById('workingCloth').remove();
+        this.svg.getElementById('hawaii').remove();
+        break;
+      case 3:
+        this.svg.getElementById('underwear').remove();
+        this.svg.getElementById('fancyDress').remove();
+        this.svg.getElementById('workingCloth').remove();
+        // this.svg.getElementById('hawaii').remove();
         break;
       default:
         console.log(`cloth ${cloth} unknown.`);

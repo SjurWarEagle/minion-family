@@ -23,20 +23,13 @@ export class DnaRandomizerService {
   }
 
   private generateCloth(dna: MinionDna): void {
-    const rnd = this.chance.integer({ min: 0, max: 100 });
-    let cloth = 0;
-    if (rnd <= 1) {
-      dna.pocket = false;
-      cloth = 0;
-    } else if (rnd <= 2) {
-      dna.pocket = false;
-      cloth = 1;
-    } else {
-      dna.pocket = this.chance.bool({ likelihood: 80 });
-      cloth = 2;
-    }
+    const rnd = this.chance.weighted([0, 1, 2, 3], [2, 2, 90, 2]);
+    dna.pocket = false;
 
-    dna.cloths = cloth;
+    if (rnd === 2) {
+      dna.pocket = this.chance.bool({ likelihood: 50 });
+    }
+    dna.cloths = rnd;
   }
 
   public async generateMinion(dnaGenerationParameters?: DnaGenerationParameters): Promise<MinionDna> {
@@ -50,8 +43,11 @@ export class DnaRandomizerService {
     dna.hairType = this.chance.integer({ min: 0, max: 4 });
 
     this.generateCloth(dna);
-    dna.leftHandItem = this.getItemInHandHand();
-    dna.rightHandItem = this.getItemInHandHand();
+    while (dna.leftHandItem === dna.rightHandItem && dna.leftHandItem !== 0 && dna.rightHandItem !== 0) {
+      //prevent having the same item in both hands, it happened too often because chance.js has a bad random generator
+      dna.leftHandItem = this.getItemInHandHand();
+      dna.rightHandItem = this.getItemInHandHand();
+    }
 
     dna.twoEyes = this.chance.bool({ likelihood: 80 });
 

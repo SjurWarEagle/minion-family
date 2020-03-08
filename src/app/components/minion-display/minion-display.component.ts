@@ -20,6 +20,12 @@ export class MinionDisplayComponent {
   private minionDna: MinionDna;
 
   @Input()
+  public width: number;
+
+  @Input()
+  public height: number;
+
+  @Input()
   set svgContent(content: string) {
     this._svgContent = content;
     setTimeout(() => {
@@ -51,13 +57,19 @@ export class MinionDisplayComponent {
     if (!this.minionDna) {
       this.minionDna = await this.dnaRandomizerService.generateMinion({ allowColoredEyes: true });
     }
-    // const svgSize = 'calc(100% - 1.5em)';
-    const tmp = (this.container.nativeElement as HTMLElement) as HTMLElement | any;
+    if (this.height && this.width) {
+      this.svg.setAttribute('height', this.height.toString());
+      this.svg.setAttribute('width', this.width.toString());
+    } else {
+      // const svgSize = 'calc(100% - 1.5em)';
+      const tmp = (this.container.nativeElement as HTMLElement) as HTMLElement | any;
 
-    // const svgSize = Math.min(tmp.getBoundingClientRect().height, tmp.getBoundingClientRect().width) + 'px';
-    // console.log('svgSize', svgSize);
-    this.svg.setAttribute('height', tmp.getBoundingClientRect().height);
-    this.svg.setAttribute('width', tmp.getBoundingClientRect().width);
+      // const svgSize = Math.min(tmp.getBoundingClientRect().height, tmp.getBoundingClientRect().width) + 'px';
+      // console.log('svgSize', svgSize);
+      const boundingClientRect = tmp.getBoundingClientRect();
+      this.svg.setAttribute('height', boundingClientRect.height);
+      this.svg.setAttribute('width', boundingClientRect.width);
+    }
 
     // const svgSize = Math.min(tmp.getBoundingClientRect().height, tmp.getBoundingClientRect().width) + 'px';
     // console.log('svgSize', svgSize);

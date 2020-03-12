@@ -19,7 +19,7 @@ export class DnaRandomizerService {
   constructor() {}
 
   private getItemInHandHand(): number {
-    return this.chance.weighted([0, 1, 2, 3, 4, 5, 6], [60, 10, 10, 10, 2, 2, 2]);
+    return this.chance.weighted([0, 1, 2, 3, 4, 5, 6, 7], [60, 10, 10, 10, 2, 2, 2, 2]);
   }
 
   private generateCloth(dna: MinionDna): void {
@@ -43,10 +43,16 @@ export class DnaRandomizerService {
     dna.hairType = this.chance.integer({ min: 0, max: 4 });
 
     this.generateCloth(dna);
-    while (dna.leftHandItem === dna.rightHandItem && dna.leftHandItem !== 0 && dna.rightHandItem !== 0) {
-      //prevent having the same item in both hands, it happened too often because chance.js has a bad random generator
+    let holdsSameItem = true;
+    let signAndItem = true;
+    while (holdsSameItem || signAndItem) {
       dna.leftHandItem = this.getItemInHandHand();
       dna.rightHandItem = this.getItemInHandHand();
+      //prevent having the same item in both hands, it happened too often because chance.js has a bad random generator
+      holdsSameItem = dna.leftHandItem === dna.rightHandItem && dna.leftHandItem !== 0 && dna.rightHandItem !== 0;
+      //prevent item and sign, as item then is not visible
+      signAndItem =
+        (dna.leftHandItem === 7 && dna.rightHandItem !== 0) || (dna.leftHandItem !== 0 && dna.rightHandItem === 7);
     }
 
     dna.twoEyes = this.chance.bool({ likelihood: 80 });

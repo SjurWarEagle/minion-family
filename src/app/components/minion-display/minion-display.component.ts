@@ -282,6 +282,7 @@ export class MinionDisplayComponent {
         this.svg.getElementById(`${hand}Router`).remove();
         this.svg.getElementById(`${hand}Teddy`).remove();
         this.svg.getElementById(`${hand}Lollie`).remove();
+        this.svg.getElementById(`${hand}Sign`).remove();
         break;
       case 1:
         // this.svg.getElementById(`${hand}Banana`).remove();
@@ -290,6 +291,7 @@ export class MinionDisplayComponent {
         this.svg.getElementById(`${hand}Router`).remove();
         this.svg.getElementById(`${hand}Teddy`).remove();
         this.svg.getElementById(`${hand}Lollie`).remove();
+        this.svg.getElementById(`${hand}Sign`).remove();
         break;
       case 2:
         this.svg.getElementById(`${hand}Banana`).remove();
@@ -298,6 +300,7 @@ export class MinionDisplayComponent {
         this.svg.getElementById(`${hand}Router`).remove();
         this.svg.getElementById(`${hand}Teddy`).remove();
         this.svg.getElementById(`${hand}Lollie`).remove();
+        this.svg.getElementById(`${hand}Sign`).remove();
         break;
       case 3:
         this.svg.getElementById(`${hand}Banana`).remove();
@@ -306,6 +309,7 @@ export class MinionDisplayComponent {
         this.svg.getElementById(`${hand}Router`).remove();
         this.svg.getElementById(`${hand}Teddy`).remove();
         this.svg.getElementById(`${hand}Lollie`).remove();
+        this.svg.getElementById(`${hand}Sign`).remove();
         break;
       case 4:
         this.svg.getElementById(`${hand}Banana`).remove();
@@ -314,6 +318,7 @@ export class MinionDisplayComponent {
         // this.svg.getElementById(`${hand}Router`).remove();
         this.svg.getElementById(`${hand}Teddy`).remove();
         this.svg.getElementById(`${hand}Lollie`).remove();
+        this.svg.getElementById(`${hand}Sign`).remove();
         break;
       case 5:
         this.svg.getElementById(`${hand}Banana`).remove();
@@ -322,6 +327,7 @@ export class MinionDisplayComponent {
         this.svg.getElementById(`${hand}Router`).remove();
         // this.svg.getElementById(`${hand}Teddy`).remove();
         this.svg.getElementById(`${hand}Lollie`).remove();
+        this.svg.getElementById(`${hand}Sign`).remove();
         break;
       case 6:
         this.svg.getElementById(`${hand}Banana`).remove();
@@ -330,6 +336,16 @@ export class MinionDisplayComponent {
         this.svg.getElementById(`${hand}Router`).remove();
         this.svg.getElementById(`${hand}Teddy`).remove();
         // this.svg.getElementById(`${hand}Lollie`).remove();
+        this.svg.getElementById(`${hand}Sign`).remove();
+        break;
+      case 7:
+        this.svg.getElementById(`${hand}Banana`).remove();
+        this.svg.getElementById(`${hand}Wrench`).remove();
+        this.svg.getElementById(`${hand}Hammer`).remove();
+        this.svg.getElementById(`${hand}Router`).remove();
+        this.svg.getElementById(`${hand}Teddy`).remove();
+        this.svg.getElementById(`${hand}Lollie`).remove();
+        // this.svg.getElementById(`${hand}Sign`).remove();
         break;
     }
   }

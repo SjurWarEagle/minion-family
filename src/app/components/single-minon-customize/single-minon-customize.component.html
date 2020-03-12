@@ -38,8 +38,8 @@
   <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.shoes">Shoes</mat-checkbox><br />
   <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.pocket">Pocket</mat-checkbox><br />
   <mat-label>Items:</mat-label>
-  <mat-slider [(value)]="minionDna.leftHandItem" min="0" max="6" (change)="triggerUpdate()" [step]="1"></mat-slider>
-  <mat-slider [(value)]="minionDna.rightHandItem" min="0" max="6" (change)="triggerUpdate()" [step]="1"></mat-slider>
+  <mat-slider [(value)]="minionDna.leftHandItem" min="0" max="7" (change)="triggerUpdate()" [step]="1"></mat-slider>
+  <mat-slider [(value)]="minionDna.rightHandItem" min="0" max="7" (change)="triggerUpdate()" [step]="1"></mat-slider>
   <mat-label>Hair:</mat-label>
   <mat-slider [(value)]="minionDna.hairType" min="0" max="4" (change)="triggerUpdate()" [step]="1"></mat-slider><br />
   <mat-label>Cloth:</mat-label>

@@ -57,15 +57,15 @@ export class DnaRandomizerService {
 
     //grayscale pupils, color ones looked strange
     // maybe add them later with a low chance
-    let color = '#FFFFFF';
+    let color: number = 0xffffff;
     while (chroma(color).luminance() > 0.25) {
       if (dnaGenerationParameters && dnaGenerationParameters.allowColoredEyes) {
-        color = chroma.random().hex();
+        color = chroma.random().num();
       } else {
         color = chroma
           .random()
           .desaturate(255)
-          .hex();
+          .num();
       }
       // console.log(chroma(color).luminance());
       // console.log('color',color);

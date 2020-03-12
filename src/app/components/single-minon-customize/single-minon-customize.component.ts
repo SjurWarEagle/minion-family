@@ -13,7 +13,16 @@ export class SingleMinonCustomizeComponent implements OnInit {
   @Output()
   public minionDnaChanged: EventEmitter<MinionDna> = new EventEmitter<MinionDna>();
 
+  public exeColorR: number = 100;
+  public exeColorG: number = 100;
+  public exeColorB: number = 100;
+
+  private triggerUpdateEyeColor(): void {
+    this.triggerUpdate();
+  }
+
   private triggerUpdate(): void {
+    this.minionDna.eye.color = this.exeColorR * 0xffff + this.exeColorG * 0xff + this.exeColorB;
     this.minionDnaChanged.emit(this.minionDna);
   }
 

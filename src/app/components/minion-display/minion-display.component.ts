@@ -71,19 +71,15 @@ export class MinionDisplayComponent {
       this.svg.setAttribute('width', boundingClientRect.width);
     }
 
-    // const svgSize = Math.min(tmp.getBoundingClientRect().height, tmp.getBoundingClientRect().width) + 'px';
-    // console.log('svgSize', svgSize);
-    // this.svg.setAttribute('height', svgSize);
-    // this.svg.setAttribute('width', svgSize);
-    //
     // minion original color: fce029
     const colorScale = chroma.scale(['fce029', 'fcc629']).domain([0, 100]);
     const skinColor = colorScale(this.minionDna.skinColor).hex();
 
     this.updateIds(this.svg);
-    this.setGradientForIris(this.svg.getElementById(this.ids.eyeRadiant), this.minionDna.eye.color);
 
     if (this.minionDna.twoEyes) {
+      //TODO use both eyes
+      this.setGradientForIris(this.svg.getElementById(this.ids.eyeRadiant), this.minionDna.eye.color);
       this.setEyes(
         this.svg.getElementById('eyeRight'),
         this.svg.getElementById('eyeLeft'),
@@ -95,6 +91,7 @@ export class MinionDisplayComponent {
 
       this.svg.getElementById('groupSingleEye').remove(0);
     } else {
+      this.setGradientForIris(this.svg.getElementById(this.ids.eyeRadiant), this.minionDna.eye.color);
       this.setEye(this.svg.getElementById('eye'), this.minionDna.eyeRight);
       this.setPupilSingleEye(this.svg.getElementById('singleEyePupil'), this.minionDna.eye);
       this.svg.getElementById('groupDoubleEyes').remove();
@@ -234,11 +231,24 @@ export class MinionDisplayComponent {
     }
   }
 
-  private setGradientForIris(gradient: SVGRadialGradientElement, color: string): void {
-    // console.log('gradient',gradient.children[2]);
+  // chroma.hex doesn't like hex numbers that are not length 6
+  private toLength6(input: string): string {
+    let tmp = input;
+    while (tmp.length < 6) {
+      tmp = '0' + tmp;
+    }
+    return tmp;
+  }
 
-    (gradient.children[1] as any).style = 'stop-color:' + color;
-    (gradient.children[2] as any).style = 'stop-color:' + color;
+  private setGradientForIris(gradient: SVGRadialGradientElement, color: number): void {
+    // console.log('gradient', gradient.children[2]);
+
+    const colorHex = chroma.hex(this.toLength6(Math.round(color).toString(16)));
+
+    (gradient.children[1] as any).style = 'stop-color: ' + colorHex;
+    (gradient.children[2] as any).style = 'stop-color: ' + colorHex;
+
+    // console.log('gradient', gradient.children);
   }
 
   private setEyes(pupilLeft, pupilRight, leftEye: MinionDnaEye, rightEye: MinionDnaEye): void {

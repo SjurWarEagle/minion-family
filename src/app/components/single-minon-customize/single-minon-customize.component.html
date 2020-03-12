@@ -12,6 +12,11 @@
     <mat-label>Eye Radius:</mat-label>
     <mat-slider [(value)]="minionDna.eyeLeft.eyeRadius" min="15" max="20" (change)="triggerUpdate()" [step]=".1"></mat-slider>
     <mat-slider [(value)]="minionDna.eyeRight.eyeRadius" min="15" max="20" (change)="triggerUpdate()" [step]=".1"></mat-slider>
+    <mat-label>Eye Color:</mat-label>
+    <mat-slider [(value)]="exeColorR" min=1 max=255 (change)="triggerUpdateEyeColor()" [step]="1"></mat-slider>
+    <mat-slider [(value)]="exeColorG" min=1 max=255 (change)="triggerUpdateEyeColor()" [step]="1"></mat-slider>
+    <mat-slider [(value)]="exeColorB" min=1 max=255 (change)="triggerUpdateEyeColor()" [step]="1"></mat-slider>
+<!--    <mat-slider [(value)]="minionDna.eyeRight.color" min=0 max=0xFFFFFF (change)="triggerUpdate()" [step]="1"></mat-slider>-->
 <!--    <mat-label>Iris Radius:</mat-label>-->
 <!--    <mat-slider [(value)]="minionDna.eyeLeft.irisRadius" min="5" max="13" (change)="triggerUpdate()" [step]=".1"></mat-slider>-->
 <!--    <mat-slider [(value)]="minionDna.eyeRight.irisRadius" min="5" max="12" (change)="triggerUpdate()" [step]=".1"></mat-slider>-->
@@ -22,6 +27,8 @@
     <mat-slider [(value)]="minionDna.eye.pupilShift" min="-7" max="8" (change)="triggerUpdate()" [step]="1"></mat-slider>
     <mat-label>Eye Radius:</mat-label>
     <mat-slider [(value)]="minionDna.eye.eyeRadius" min="15" max="20" (change)="triggerUpdate()" [step]=".1"></mat-slider>
+    <mat-label>Eye Color:</mat-label>
+    <mat-slider [(value)]="minionDna.eye.color" min=1 max=0xFFFFFF (change)="triggerUpdate()" [step]="1"></mat-slider>
   </div>
 
   <mat-label>Mood:</mat-label>

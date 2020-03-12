@@ -1,5 +1,5 @@
 export class MinionDnaEye {
-  color: string;
+  color: number;
   pupilShift: number;
   irisRadius: number;
   eyeRadius: number;

@@ -17,11 +17,11 @@ export class SingleMinonCustomizeComponent implements OnInit {
   public exeColorG: number = 100;
   public exeColorB: number = 100;
 
-  private triggerUpdateEyeColor(): void {
+  public triggerUpdateEyeColor(): void {
     this.triggerUpdate();
   }
 
-  private triggerUpdate(): void {
+  public triggerUpdate(): void {
     this.minionDna.eye.color = this.exeColorR * 0xffff + this.exeColorG * 0xff + this.exeColorB;
     this.minionDnaChanged.emit(this.minionDna);
   }

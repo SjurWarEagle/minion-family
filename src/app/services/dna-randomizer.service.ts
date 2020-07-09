@@ -5,7 +5,7 @@ import * as chroma from 'chroma-js';
 import { DnaGenerationParameters } from '../model/dna-generation-parameter';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 /**
  * Generates the DNA for a minion by random values.
@@ -16,7 +16,8 @@ import { DnaGenerationParameters } from '../model/dna-generation-parameter';
 export class DnaRandomizerService {
   private chance = new Chance();
 
-  constructor() {}
+  constructor() {
+  }
 
   private getItemInHandHand(): number {
     return this.chance.weighted([0, 1, 2, 3, 4, 5, 6, 7], [60, 10, 10, 10, 2, 2, 2, 2]);
@@ -51,9 +52,9 @@ export class DnaRandomizerService {
     while (holdsSameItem || signAndItem) {
       dna.leftHandItem = this.getItemInHandHand();
       dna.rightHandItem = this.getItemInHandHand();
-      //prevent having the same item in both hands, it happened too often because chance.js has a bad random generator
+      // prevent having the same item in both hands, it happened too often because chance.js has a bad random generator
       holdsSameItem = dna.leftHandItem === dna.rightHandItem && dna.leftHandItem !== 0 && dna.rightHandItem !== 0;
-      //prevent item and sign, as item then is not visible
+      // prevent item and sign, as item then is not visible
       signAndItem =
         (dna.leftHandItem === 7 && dna.rightHandItem !== 0) || (dna.leftHandItem !== 0 && dna.rightHandItem === 7);
     }
@@ -68,7 +69,11 @@ export class DnaRandomizerService {
     // maybe add them later with a low chance
     let color: number = 0xffffff;
     while (chroma(color).luminance() > 0.25) {
-      if (dnaGenerationParameters && dnaGenerationParameters.allowColoredEyes) {
+      if (
+        dnaGenerationParameters &&
+        dnaGenerationParameters.allowColoredEyes &&
+        this.chance.bool({ likelihood: 100 })
+      ) {
         color = chroma.random().num();
       } else {
         color = chroma
@@ -83,22 +88,22 @@ export class DnaRandomizerService {
     dna.eyeLeft = {
       pupilShift: irisShift,
       irisRadius: irisRadius,
-      color: color,
-      eyeRadius: eyeRadius,
+      color: Math.floor(color),
+      eyeRadius: eyeRadius
     };
 
     dna.eyeRight = {
       pupilShift: -irisShift,
       irisRadius: irisRadius,
-      color: color,
-      eyeRadius: eyeRadius,
+      color: Math.floor(color),
+      eyeRadius: eyeRadius
     };
 
     dna.eye = {
       pupilShift: irisShift,
       irisRadius: irisRadius,
-      color: color,
-      eyeRadius: eyeRadius,
+      color: Math.floor(color),
+      eyeRadius: eyeRadius
     };
 
     return dna;

@@ -33,9 +33,7 @@ export class MinionPanelComponent implements OnInit, OnChanges {
     this.cntArray = undefined;
     setTimeout(() => {
       const tmpCounter = this.nrMinionsHeight * this.nrMinionsWidth;
-      this.cntArray = Array(tmpCounter)
-        .fill(0)
-        .map((x, i) => i);
+      this.cntArray = Array(tmpCounter).fill(0);
       this.sizeOfMinionHeight = this.pixelHeight / this.nrMinionsHeight;
       this.sizeOfMinionWidth = this.pixelWidth / this.nrMinionsWidth;
     });

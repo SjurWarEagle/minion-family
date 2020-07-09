@@ -1,8 +1,8 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { DnaRandomizerService } from '../../services/dna-randomizer.service';
 import { MinionDna, MinionDnaEye } from '../../model/minion-dna';
-import { v1 } from 'uuid';
 import * as chroma from 'chroma-js';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-minion-display',
@@ -74,28 +74,7 @@ export class MinionDisplayComponent {
     // minion original color: fce029
     const colorScale = chroma.scale(['fce029', 'fcc629']).domain([0, 100]);
     const skinColor = colorScale(this.minionDna.skinColor).hex();
-
-    this.updateIds(this.svg);
-
-    if (this.minionDna.twoEyes) {
-      //TODO use both eyes
-      this.setGradientForIris(this.svg.getElementById(this.ids.eyeRadiant), this.minionDna.eye.color);
-      this.setEyes(
-        this.svg.getElementById('eyeRight'),
-        this.svg.getElementById('eyeLeft'),
-        this.minionDna.eyeRight,
-        this.minionDna.eyeLeft
-      );
-      this.setPupilTwoEyes(this.svg.getElementById('doubleEyesPupilLeft'), this.minionDna.eyeLeft);
-      this.setPupilTwoEyes(this.svg.getElementById('doubleEyesPupilRight'), this.minionDna.eyeRight);
-
-      this.svg.getElementById('groupSingleEye').remove(0);
-    } else {
-      this.setGradientForIris(this.svg.getElementById(this.ids.eyeRadiant), this.minionDna.eye.color);
-      this.setEye(this.svg.getElementById('eye'), this.minionDna.eyeRight);
-      this.setPupilSingleEye(this.svg.getElementById('singleEyePupil'), this.minionDna.eye);
-      this.svg.getElementById('groupDoubleEyes').remove();
-    }
+    this.modifyEyes();
 
     if (!this.minionDna.pocket) {
       if (this.svg.getElementById('pocket')) {
@@ -111,16 +90,43 @@ export class MinionDisplayComponent {
     this.setItemInHands('rightHand', this.minionDna.rightHandItem);
   }
 
-  private setMouth(element, mood: number) {
-    const d = element.getAttribute('d').toString();
-    const dd = d.split(' ');
-    // console.log('dd',dd);
-    const entry = dd[3].split(',');
-    entry[1] = ((30 * mood) / 100).toString();
-    // console.log('entry',entry);
-    dd[3] = entry.join(',');
-    // console.log('dd',dd);
-    this.svg.getElementById('mouth').setAttribute('d', dd.join(' '));
+  private modifyEyes(): void {
+    if (this.minionDna.twoEyes) {
+      //TODO use both eyes
+      const color = '#' + this.minionDna.eye.color.toString(16);
+      this.svg.getElementById('doubleEyesPupilRight').style = `fill:${color} ;stroke:${color} ;stroke-width:0.04412191`;
+      this.svg.getElementById('doubleEyesPupilLeft').style = `fill:${color} ;stroke:${color} ;stroke-width:0.04412191`;
+
+      this.setEyes(
+        this.svg.getElementById('eyeRight'),
+        this.svg.getElementById('eyeLeft'),
+        this.minionDna.eyeRight,
+        this.minionDna.eyeLeft
+      );
+      this.setPupilTwoEyes(this.svg.getElementById('doubleEyeLeftPupil'), this.minionDna.eyeLeft);
+      this.setPupilTwoEyes(this.svg.getElementById('doubleEyeRightPupil'), this.minionDna.eyeRight);
+
+      this.svg.getElementById('groupSingleEye').remove();
+    } else {
+      const color = '#' + this.minionDna.eye.color.toString(16);
+      this.svg.getElementById('singleEyePupilIris').style = `fill:${color} ;stroke:${color} ;stroke-width:0.04412191`;
+      this.setEye(this.svg.getElementById('eye'), this.minionDna.eyeRight);
+      this.svg.getElementById('groupDoubleEyes').remove();
+    }
+  }
+
+  private setMouth(element, mood: number): void {
+    return;
+
+    // const d = element.getAttribute('d').toString();
+    // const dd = d.split(' ');
+    // console.log('dd', dd);
+    // const entry = dd[3].split(',');
+    // entry[1] = ((30 * mood) / 100).toString();
+    // // console.log('entry',entry);
+    // dd[3] = entry.join(',');
+    // // console.log('dd',dd);
+    // this.svg.getElementById('mouth').setAttribute('d', dd.join(' '));
   }
 
   private setSkinColor(skinColor: string) {
@@ -150,13 +156,6 @@ export class MinionDisplayComponent {
     // pupilLeft.style.fill = minionDna.color;
     // pupilLeft.style.stroke = minionDna.color;
     pupil.setAttribute('transform', `${pupil.getAttribute('transform')} translate(${minionDna.pupilShift},0)`);
-  }
-
-  private setPupilSingleEye(pupil, minionDna: MinionDnaEye): void {
-    // pupil.setAttribute('r', minionDna.irisRadius.toString());
-    // pupil.style.fill = minionDna.color;
-    // pupil.style.stroke = minionDna.color;
-    // console.log('pupil', pupil);
   }
 
   private setEye(pupil, eye: MinionDnaEye): void {
@@ -240,111 +239,92 @@ export class MinionDisplayComponent {
     return tmp;
   }
 
-  private setGradientForIris(gradient: SVGRadialGradientElement, color: number): void {
-    // console.log('gradient', gradient.children[2]);
-
-    const colorHex = chroma.hex(this.toLength6(Math.round(color).toString(16)));
-
-    (gradient.children[1] as any).style = 'stop-color: ' + colorHex;
-    (gradient.children[2] as any).style = 'stop-color: ' + colorHex;
-
-    // console.log('gradient', gradient.children);
-  }
-
   private setEyes(pupilLeft, pupilRight, leftEye: MinionDnaEye, rightEye: MinionDnaEye): void {
     pupilLeft.setAttribute('r', leftEye.eyeRadius.toString());
     pupilRight.setAttribute('r', rightEye.eyeRadius.toString());
   }
 
-  private updateIds(svg: HTMLElement | any) {
-    const id = v1();
-    this.ids.eyeRadiant = 'singleEyeIris' + id;
-    svg.getElementById('radialGradient29600').setAttribute('id', this.ids.eyeRadiant);
-    // console.log(svg.getElementById(this.ids.eyeRadiant));
-    svg.getElementById(
-      'singleEyePupilPart1'
-    ).style = `fill:url(#${this.ids.eyeRadiant});fill-rule:evenodd;stroke-width:0.04412191`;
-    svg.getElementById(
-      'doubleEyesPupilLeftPart1'
-    ).style = `fill:url(#${this.ids.eyeRadiant});fill-rule:evenodd;stroke-width:0.04412191`;
-    svg.getElementById(
-      'doubleEyesPupilRightPart1'
-    ).style = `fill:url(#${this.ids.eyeRadiant});fill-rule:evenodd;stroke-width:0.04412191`;
-    // console.log(svg.getElementById('singleEyePupilPart1'));
+  private removeFromSvg(id: string): void {
+    const target = this.svg.getElementById(id);
+    if (isNullOrUndefined(target)) {
+      console.log(`Cannot remove id='${id}'`);
+    } else {
+      target.remove();
+    }
   }
 
   private setItemInHands(hand: string, itemInHand: number) {
     switch (itemInHand) {
       case 0:
-        this.svg.getElementById(`${hand}Banana`).remove();
-        this.svg.getElementById(`${hand}Wrench`).remove();
-        this.svg.getElementById(`${hand}Hammer`).remove();
-        this.svg.getElementById(`${hand}Router`).remove();
-        this.svg.getElementById(`${hand}Teddy`).remove();
-        this.svg.getElementById(`${hand}Lollie`).remove();
-        this.svg.getElementById(`${hand}Sign`).remove();
+        this.removeFromSvg(`${hand}Banana`);
+        this.removeFromSvg(`${hand}Wrench`);
+        this.removeFromSvg(`${hand}Hammer`);
+        this.removeFromSvg(`${hand}Router`);
+        this.removeFromSvg(`${hand}Teddy`);
+        this.removeFromSvg(`${hand}Lollie`);
+        this.removeFromSvg(`${hand}Sign`);
         break;
       case 1:
         // this.svg.getElementById(`${hand}Banana`).remove();
-        this.svg.getElementById(`${hand}Wrench`).remove();
-        this.svg.getElementById(`${hand}Hammer`).remove();
-        this.svg.getElementById(`${hand}Router`).remove();
-        this.svg.getElementById(`${hand}Teddy`).remove();
-        this.svg.getElementById(`${hand}Lollie`).remove();
-        this.svg.getElementById(`${hand}Sign`).remove();
+        this.removeFromSvg(`${hand}Wrench`);
+        this.removeFromSvg(`${hand}Hammer`);
+        this.removeFromSvg(`${hand}Router`);
+        this.removeFromSvg(`${hand}Teddy`);
+        this.removeFromSvg(`${hand}Lollie`);
+        this.removeFromSvg(`${hand}Sign`);
         break;
       case 2:
-        this.svg.getElementById(`${hand}Banana`).remove();
+        this.removeFromSvg(`${hand}Banana`);
         // this.svg.getElementById(`${hand}Wrench`).remove();
-        this.svg.getElementById(`${hand}Hammer`).remove();
-        this.svg.getElementById(`${hand}Router`).remove();
-        this.svg.getElementById(`${hand}Teddy`).remove();
-        this.svg.getElementById(`${hand}Lollie`).remove();
-        this.svg.getElementById(`${hand}Sign`).remove();
+        this.removeFromSvg(`${hand}Hammer`);
+        this.removeFromSvg(`${hand}Router`);
+        this.removeFromSvg(`${hand}Teddy`);
+        this.removeFromSvg(`${hand}Lollie`);
+        this.removeFromSvg(`${hand}Sign`);
         break;
       case 3:
-        this.svg.getElementById(`${hand}Banana`).remove();
-        this.svg.getElementById(`${hand}Wrench`).remove();
+        this.removeFromSvg(`${hand}Banana`);
+        this.removeFromSvg(`${hand}Wrench`);
         // this.svg.getElementById(`${hand}Hammer`).remove();
-        this.svg.getElementById(`${hand}Router`).remove();
-        this.svg.getElementById(`${hand}Teddy`).remove();
-        this.svg.getElementById(`${hand}Lollie`).remove();
-        this.svg.getElementById(`${hand}Sign`).remove();
+        this.removeFromSvg(`${hand}Router`);
+        this.removeFromSvg(`${hand}Teddy`);
+        this.removeFromSvg(`${hand}Lollie`);
+        this.removeFromSvg(`${hand}Sign`);
         break;
       case 4:
-        this.svg.getElementById(`${hand}Banana`).remove();
-        this.svg.getElementById(`${hand}Wrench`).remove();
-        this.svg.getElementById(`${hand}Hammer`).remove();
+        this.removeFromSvg(`${hand}Banana`);
+        this.removeFromSvg(`${hand}Wrench`);
+        this.removeFromSvg(`${hand}Hammer`);
         // this.svg.getElementById(`${hand}Router`).remove();
-        this.svg.getElementById(`${hand}Teddy`).remove();
-        this.svg.getElementById(`${hand}Lollie`).remove();
-        this.svg.getElementById(`${hand}Sign`).remove();
+        this.removeFromSvg(`${hand}Teddy`);
+        this.removeFromSvg(`${hand}Lollie`);
+        this.removeFromSvg(`${hand}Sign`);
         break;
       case 5:
-        this.svg.getElementById(`${hand}Banana`).remove();
-        this.svg.getElementById(`${hand}Wrench`).remove();
-        this.svg.getElementById(`${hand}Hammer`).remove();
-        this.svg.getElementById(`${hand}Router`).remove();
+        this.removeFromSvg(`${hand}Banana`);
+        this.removeFromSvg(`${hand}Wrench`);
+        this.removeFromSvg(`${hand}Hammer`);
+        this.removeFromSvg(`${hand}Router`);
         // this.svg.getElementById(`${hand}Teddy`).remove();
-        this.svg.getElementById(`${hand}Lollie`).remove();
-        this.svg.getElementById(`${hand}Sign`).remove();
+        this.removeFromSvg(`${hand}Lollie`);
+        this.removeFromSvg(`${hand}Sign`);
         break;
       case 6:
-        this.svg.getElementById(`${hand}Banana`).remove();
-        this.svg.getElementById(`${hand}Wrench`).remove();
-        this.svg.getElementById(`${hand}Hammer`).remove();
-        this.svg.getElementById(`${hand}Router`).remove();
-        this.svg.getElementById(`${hand}Teddy`).remove();
+        this.removeFromSvg(`${hand}Banana`);
+        this.removeFromSvg(`${hand}Wrench`);
+        this.removeFromSvg(`${hand}Hammer`);
+        this.removeFromSvg(`${hand}Router`);
+        this.removeFromSvg(`${hand}Teddy`);
         // this.svg.getElementById(`${hand}Lollie`).remove();
-        this.svg.getElementById(`${hand}Sign`).remove();
+        this.removeFromSvg(`${hand}Sign`);
         break;
       case 7:
-        this.svg.getElementById(`${hand}Banana`).remove();
-        this.svg.getElementById(`${hand}Wrench`).remove();
-        this.svg.getElementById(`${hand}Hammer`).remove();
-        this.svg.getElementById(`${hand}Router`).remove();
-        this.svg.getElementById(`${hand}Teddy`).remove();
-        this.svg.getElementById(`${hand}Lollie`).remove();
+        this.removeFromSvg(`${hand}Banana`);
+        this.removeFromSvg(`${hand}Wrench`);
+        this.removeFromSvg(`${hand}Hammer`);
+        this.removeFromSvg(`${hand}Router`);
+        this.removeFromSvg(`${hand}Teddy`);
+        this.removeFromSvg(`${hand}Lollie`);
         // this.svg.getElementById(`${hand}Sign`).remove();
         break;
     }

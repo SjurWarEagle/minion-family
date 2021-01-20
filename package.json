@@ -32,7 +32,7 @@
     "chance": "1.1.4",
     "lodash": "4.17.15",
     "chroma-js": "2.1.0",
-    "gsap": "3.2.6",
+    "gsap": "3.6.0",
     "npm-check-updates": "4.1.2",
     "rxjs": "6.5.5",
     "html2canvas": "1.0.0-rc.5",

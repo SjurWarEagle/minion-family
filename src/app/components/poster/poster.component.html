@@ -19,11 +19,3 @@
     <input name="nrMinionsWidth" matInput value="5" type="number" min="1" [(ngModel)]="nrMinionsWidth" (change)="resetMinions()">
   </mat-form-field>
 </form>
-
-<app-minion-panel
-  [svgContent]="svgContent"
-  [nrMinionsHeight]="nrMinionsHeight"
-  [nrMinionsWidth]="nrMinionsWidth"
-  [pixelHeight]="pixelHeight"
-  [pixelWidth]="pixelWidth"
-></app-minion-panel>

@@ -7,7 +7,7 @@ import { MinionDna } from '../../model/minion-dna';
   styleUrls: ['./minion-display.component.scss'],
 })
 export class MinionDisplayComponent {
-  private minionDnaString: string;
+  public minionDnaString: string;
 
   @Input()
   public width: number;

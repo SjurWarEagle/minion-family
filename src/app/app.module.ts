@@ -22,7 +22,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { LoadingIndicatorComponent } from './components/loading-indicator/loading-indicator.component';
 import { PosterComponent } from './components/poster/poster.component';
 import { MatInputModule } from '@angular/material/input';
-import { MinionPanelComponent } from './components/minion-panel/minion-panel.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,6 @@ import { MinionPanelComponent } from './components/minion-panel/minion-panel.com
     PosterComponent,
     SingleMinonCustomizeComponent,
     LoadingIndicatorComponent,
-    MinionPanelComponent,
   ],
   imports: [
     BrowserModule, //

@@ -11,6 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class CustomizerComponent implements OnInit {
   public currentMinionDna: MinionDna;
   public svgContent: string;
+  public size: number;
 
   constructor(private dnaRandomizerService: DnaRandomizerService, private http: HttpClient) {}
 
@@ -41,5 +42,9 @@ export class CustomizerComponent implements OnInit {
       //generate new reference, so that change detection is triggered
       this.currentMinionDna = JSON.parse(JSON.stringify(dna));
     });
+  }
+
+  public setSize(newSize:number  ){
+    this.size=newSize;
   }
 }

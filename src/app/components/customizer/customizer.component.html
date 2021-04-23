@@ -1,14 +1,16 @@
 <div class="all">
     <div class="config">
-    <app-single-minon-customize
+    <app-single-minion-customize
       [minionDna]="currentMinionDna"
+      (size)="setSize($event)"
       (minionDnaChanged)="updateMinionDna($event)"
-    ></app-single-minon-customize>
+    ></app-single-minion-customize>
   </div>
   <div class="display">
     <app-minion-display
       id="areaToExport"
       [minionDnaToShow]="currentMinionDna"
+      [size]="size"
     ></app-minion-display>
   </div>
 </div>

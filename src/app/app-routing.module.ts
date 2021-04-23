@@ -5,21 +5,22 @@ import { CustomizerComponent } from './components/customizer/customizer.componen
 import { PosterComponent } from './components/poster/poster.component';
 
 const routes: Routes = [
-  {
-    path: 'customizer',
-    component: CustomizerComponent,
-  },
-  {
-    path: 'wall',
-    component: WallComponent,
-  },
-  {
-    path: 'poster',
-    component: PosterComponent,
-  },
+  // {
+  //   path: 'customizer',
+  //   component: CustomizerComponent,
+  // },
+  // {
+  //   path: 'wall',
+  //   component: WallComponent,
+  // },
+  // {
+  //   path: 'poster',
+  //   component: PosterComponent,
+  // },
   {
     path: '',
-    component: WallComponent,
+    component: CustomizerComponent,
+    // component: WallComponent,
   },
 ];
 

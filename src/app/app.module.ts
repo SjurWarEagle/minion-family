@@ -9,7 +9,7 @@ import { CustomizerComponent } from './components/customizer/customizer.componen
 import { WallComponent } from './components/wall/wall.component';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faListAlt } from '@fortawesome/free-regular-svg-icons';
-import { SingleMinonCustomizeComponent } from './components/single-minon-customize/single-minon-customize.component';
+import { SingleMinionCustomizeComponent } from './components/single-minon-customize/single-minion-customize.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,7 +21,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { LoadingIndicatorComponent } from './components/loading-indicator/loading-indicator.component';
 import { PosterComponent } from './components/poster/poster.component';
-import { MatInputModule } from '@angular/material/input';
+import { MatInputModule, MatTextareaAutosize } from '@angular/material/input';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { MatInputModule } from '@angular/material/input';
     CustomizerComponent,
     WallComponent,
     PosterComponent,
-    SingleMinonCustomizeComponent,
+    SingleMinionCustomizeComponent,
     LoadingIndicatorComponent,
   ],
   imports: [
@@ -47,6 +48,7 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     MatButtonModule,
     AppRoutingModule,
+    TextFieldModule,
     MatFormFieldModule,
   ],
   providers: [],

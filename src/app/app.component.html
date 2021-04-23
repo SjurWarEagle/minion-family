@@ -2,26 +2,26 @@
   <app-loading-indicator></app-loading-indicator>
 </div>
 
-<button mat-icon-button [matMenuTriggerFor]="menu" style="position: absolute">
-  <mat-icon>more_vert</mat-icon>
-</button>
+<!--<button mat-icon-button [matMenuTriggerFor]="menu" style="position: absolute">-->
+<!--  <mat-icon>more_vert</mat-icon>-->
+<!--</button>-->
 
-<mat-menu #menu="matMenu">
-  <button mat-menu-item routerLink="wall">
-    <fa-icon [icon]="minionWallIcon"></fa-icon><span class="action-label">Wall</span>
-  </button>
-  <button mat-menu-item routerLink="poster">
-    <fa-icon [icon]="minionPosterIcon"></fa-icon><span class="action-label">Poster</span>
-  </button>
-  <button mat-menu-item routerLink="customizer">
-    <fa-icon [icon]="minionCustomizerIcon"></fa-icon><span class="action-label">Customize</span>
-
-  </button>
-  <button mat-menu-item (click)="downloadAsImage()">
+<!--<mat-menu #menu="matMenu">-->
+<!--  <button mat-menu-item routerLink="wall">-->
+<!--    <fa-icon [icon]="minionWallIcon"></fa-icon><span class="action-label">Wall</span>-->
+<!--  </button>-->
+<!--  <button mat-menu-item routerLink="poster">-->
+<!--    <fa-icon [icon]="minionPosterIcon"></fa-icon><span class="action-label">Poster</span>-->
+<!--  </button>-->
+<!--  <button mat-menu-item routerLink="customizer">-->
 <!--    <fa-icon [icon]="minionCustomizerIcon"></fa-icon><span class="action-label">Customize</span>-->
-    <fa-icon [icon]="export"></fa-icon><span class="action-label">Export</span>
-  </button>
-</mat-menu>
+
+<!--  </button>-->
+<!--  <button mat-menu-item (click)="downloadAsImage()">-->
+<!--&lt;!&ndash;    <fa-icon [icon]="minionCustomizerIcon"></fa-icon><span class="action-label">Customize</span>&ndash;&gt;-->
+<!--    <fa-icon [icon]="export"></fa-icon><span class="action-label">Export</span>-->
+<!--  </button>-->
+<!--</mat-menu>-->
 
 <div style="height: 100%; width: 100%">
   <router-outlet style="height: 100%; width: 100%"></router-outlet>

@@ -1,0 +1,160 @@
+<div *ngIf="minionDna">
+  <table class="minion-config-table">
+    <tr>
+      <td>
+        <mat-label>Size</mat-label>
+      </td>
+      <td>
+        <mat-slider [(value)]="size" min=64 max=1024 (valueChange)="triggerUpdateSize($event)" [step]="10"></mat-slider>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-label>Eyes:</mat-label>
+      </td>
+      <td>
+        <mat-button-toggle-group name="nrEyes" (valueChange)="eyesChanged($event)"
+                                 [value]="minionDna.twoEyes ? '2' : '1'">
+          <mat-button-toggle value="1">👁</mat-button-toggle>
+          <mat-button-toggle value="2">👁👁</mat-button-toggle>
+        </mat-button-toggle-group>
+      </td>
+    </tr>
+    <tr *ngIf="minionDna.twoEyes">
+<!--      <td>-->
+<!--        <mat-label>Eye shift:</mat-label>-->
+<!--      </td>-->
+<!--      <td>-->
+<!--        <mat-slider [(value)]="minionDna.eyeLeft.pupilShift" min="-7" max="8" (change)="triggerUpdate()"-->
+<!--                    [step]="1"></mat-slider>-->
+<!--        <mat-slider [(value)]="minionDna.eyeRight.pupilShift" min="-7" max="8" (change)="triggerUpdate()"-->
+<!--                    [step]="1"></mat-slider>-->
+
+<!--      </td>-->
+<!--    </tr>-->
+    <tr *ngIf="minionDna.twoEyes">
+      <td>
+        <mat-label>Eye Radius:</mat-label>
+      </td>
+      <td>
+        <mat-slider [(value)]="minionDna.eyeLeft.eyeRadius" min="15" max="20" (change)="triggerUpdate()"
+                    [step]=".1"></mat-slider>
+        <mat-slider [(value)]="minionDna.eyeRight.eyeRadius" min="15" max="20" (change)="triggerUpdate()"
+                    [step]=".1"></mat-slider>
+
+      </td>
+    </tr>
+    <tr *ngIf="minionDna.twoEyes">
+      <td>
+        <mat-label>Eye Color:</mat-label>
+      </td>
+      <td>
+        <mat-slider [(value)]="exeColorR" min=1 max=255 (change)="triggerUpdateEyeColor()" [step]="1"></mat-slider>
+        <mat-slider [(value)]="exeColorG" min=1 max=255 (change)="triggerUpdateEyeColor()" [step]="1"></mat-slider>
+        <mat-slider [(value)]="exeColorB" min=1 max=255 (change)="triggerUpdateEyeColor()" [step]="1"></mat-slider>
+
+      </td>
+    </tr>
+    <tr *ngIf="!minionDna.twoEyes">
+      <td>
+        <mat-label>Eye Color:</mat-label>
+      </td>
+      <td>
+        <mat-slider [(value)]="exeColorR" min=1 max=255 (change)="triggerUpdateEyeColor()" [step]="1"></mat-slider>
+        <mat-slider [(value)]="exeColorG" min=1 max=255 (change)="triggerUpdateEyeColor()" [step]="1"></mat-slider>
+        <mat-slider [(value)]="exeColorB" min=1 max=255 (change)="triggerUpdateEyeColor()" [step]="1"></mat-slider>
+<!--        <mat-slider [(value)]="minionDna.eye.color" min=1 max=0xFFFFFF (change)="triggerUpdate()"-->
+<!--                    [step]="1"></mat-slider>-->
+      </td>
+    </tr>
+    <tr *ngIf="!minionDna.twoEyes">
+      <td>
+        <mat-label>Eye Radius:</mat-label>
+      </td>
+      <td>
+        <!--    <mat-label>Eye shift:</mat-label>-->
+        <!--    <mat-slider [(value)]="minionDna.eye.pupilShift" min="-7" max="8" (change)="triggerUpdate()" [step]="1"></mat-slider>-->
+        <mat-slider [(value)]="minionDna.eye.eyeRadius" min="15" max="20" (change)="triggerUpdate()"
+                    [step]=".1"></mat-slider>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-label>Mood:</mat-label>
+      </td>
+      <td>
+        <mat-slider [(value)]="minionDna.mood" min="-75" max="100" (change)="triggerUpdate()" [step]="1"></mat-slider>
+
+      </td>
+    </tr>
+    <tr>
+      <td>Gloves</td>
+      <td>
+        <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.gloves"></mat-checkbox>
+      </td>
+    </tr>
+    <tr>
+      <td>Shoes</td>
+      <td>
+        <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.shoes"></mat-checkbox>
+      </td>
+    </tr>
+    <tr>
+      <td>Pocket</td>
+      <td>
+        <mat-checkbox (change)="triggerUpdate()" [(ngModel)]="minionDna.pocket"></mat-checkbox>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-label>Items L:</mat-label>
+      </td>
+      <td>
+        <mat-slider [(value)]="minionDna.leftHandItem" min="0" max="7" (change)="triggerUpdate()"
+                    [step]="1"></mat-slider>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-label>Items R:</mat-label>
+      </td>
+      <td>
+        <mat-slider [(value)]="minionDna.rightHandItem" min="0" max="7" (change)="triggerUpdate()"
+                    [step]="1"></mat-slider>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-label>Hair:</mat-label>
+      </td>
+      <td>
+        <mat-slider [(value)]="minionDna.hairType" min="0" max="4" (change)="triggerUpdate()" [step]="1"></mat-slider>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-label>Cloth:</mat-label>
+      </td>
+      <td>
+        <mat-slider [(value)]="minionDna.cloths" min="0" max="5" (change)="triggerUpdate()" [step]="1"></mat-slider>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-label>Message:</mat-label>
+      </td>
+      <td>
+        <mat-form-field>
+          <textarea matInput
+                    (ngModelChange)="updateSpeechtext($event)"
+                    [(ngModel)]="minionDna.speechText"
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="2"
+                    cdkAutosizeMaxRows="5"></textarea>
+        </mat-form-field>
+      </td>
+    </tr>
+
+  </table>
+
+</div>

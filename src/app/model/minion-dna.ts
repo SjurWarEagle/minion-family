@@ -24,7 +24,7 @@ export class MinionDna {
   /**
    * The text the minion is saying in the speech bubble
    */
-  public speechText: string[] = ['', '', '', '', '', ''];
+  public speechText: string = '';
   /**
    * The way the mouth is formed
    */

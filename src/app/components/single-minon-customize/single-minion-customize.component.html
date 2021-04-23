@@ -2,10 +2,10 @@
   <table class="minion-config-table">
     <tr>
       <td>
-        <mat-label>Size</mat-label>
+        <mat-label>Resolution</mat-label>
       </td>
       <td>
-        <mat-slider [(value)]="size" min=64 max=1024 (valueChange)="triggerUpdateSize($event)" [step]="10"></mat-slider>
+        <mat-slider [(value)]="size" min=100 max=2000 (valueChange)="triggerUpdateSize($event)" [step]="10"></mat-slider>
       </td>
     </tr>
     <tr>

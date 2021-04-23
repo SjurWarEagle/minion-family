@@ -1,15 +1,13 @@
 .container {
   //border: 1px dotted darkgray;
-  height: 100%;
-  width: 100%;
+  //height: 100%;
+  //width: 100%;
+  display: flex;
+  align-content: center;
 }
 
 .minion {
-  //height: 100%;
-  //width: 100%;
+  object-fit: contain;
+  height: 100vh;
+  width: 100vw;
 }
-
-//.name {
-//  text-align: center;
-//  margin: auto;
-//}

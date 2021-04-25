@@ -7,3 +7,5 @@ Service is started on port 90, just expose it to a port of your liking.
 
 ## Status
 ![Node.js CI](https://github.com/SjurWarEagle/minion-family/workflows/Node.js%20CI/badge.svg?branch=master)
+
+[![Build&Push Docker](https://github.com/SjurWarEagle/minion-family/actions/workflows/main.yml/badge.svg)](https://github.com/SjurWarEagle/minion-family/actions/workflows/main.yml)

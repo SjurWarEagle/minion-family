@@ -15,7 +15,7 @@ export class SingleMinionCustomizeComponent implements OnInit {
 
   @Output('size')
   public sizeEmitter = new EventEmitter<number>();
-  public size = 512;
+  public size = 1024;
 
   public exeColorR: number = 100;
   public exeColorG: number = 100;
@@ -53,7 +53,7 @@ export class SingleMinionCustomizeComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.triggerUpdateSize(512);
+    this.triggerUpdateSize(1024);
   }
 
   public eyesChanged(event: string): void {

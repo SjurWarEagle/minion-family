@@ -42,7 +42,7 @@ export class DnaRandomizerService {
     //TODO think about changing this, the minions are happy person, they should have mostly a positve value,
     // but on the other side we need the low negative numbers, so that the mouth is changing visibly. Idea would be
     // to multiply the value with something, eg. if <0 value*5
-    dna.mood = this.chance.integer({ min: -75, max: 100 });
+    dna.mood = this.chance.integer({ min: -50, max: 100 });
     dna.skinColor = this.chance.integer({ min: 0, max: 100 });
     dna.hairType = this.chance.integer({ min: 0, max: 4 });
 

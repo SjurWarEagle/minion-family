@@ -1,40 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { DnaRandomizerService } from '../../services/dna-randomizer.service';
 import { MinionDna } from '../../model/minion-dna';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-customizer',
   templateUrl: './customizer.component.html',
-  styleUrls: ['./customizer.component.scss'],
+  styleUrls: ['./customizer.component.scss']
 })
 export class CustomizerComponent implements OnInit {
   public currentMinionDna: MinionDna;
-  public svgContent: string;
   public size: number;
 
-  constructor(private dnaRandomizerService: DnaRandomizerService, private http: HttpClient) {}
-
-  public ngOnInit(): void {
-    this.loadImage().then(() => {
-      this.dnaRandomizerService.generateMinion().then((dna) => {
-        this.currentMinionDna = dna;
-      });
-    });
+  constructor(private dnaRandomizerService: DnaRandomizerService) {
   }
 
-  private async loadImage(): Promise<void> {
-    const headers = new HttpHeaders();
-    headers.set('Accept', 'image/svg+xml');
-    // noinspection UnnecessaryLocalVariableJS
-    const content = await this.http
-      .get('./assets/minions-svgrepo-com.svg', {
-        headers,
-        responseType: 'text',
-      })
-      .toPromise();
-    // console.log('content=', content);
-    this.svgContent = content;
+  public ngOnInit(): void {
+    this.dnaRandomizerService.generateMinion().then((dna) => {
+      this.currentMinionDna = dna;
+    });
   }
 
   public updateMinionDna(dna: MinionDna): void {
@@ -44,7 +27,7 @@ export class CustomizerComponent implements OnInit {
     });
   }
 
-  public setSize(newSize:number  ){
-    this.size=newSize;
+  public setSize(newSize: number) {
+    this.size = newSize;
   }
 }

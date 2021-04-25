@@ -11,19 +11,17 @@ RUN mkdir -p /project/minion-family
 
 WORKDIR /project/minion-server
 RUN git clone https://github.com/SjurWarEagle/minion-server .
-RUN npm install
+RUN npm install --no-audi --progress=false
 RUN npm run build
 
 WORKDIR /project/minion-family
 RUN git clone https://github.com/SjurWarEagle/minion-family .
-RUN npm install
+RUN npm install --no-audi --progress=false
 RUN npm run build
-
 
 #TODO convert to copy, this is im this git we just cloned, no need to get it from outside
 ADD Docker/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 RUN rm -rf /etc/apt/apt.conf.d/90nginx
-
 
 EXPOSE 90
 

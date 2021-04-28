@@ -16,7 +16,7 @@ RUN npm run build
 
 WORKDIR /project/minion-family
 RUN git clone https://github.com/SjurWarEagle/minion-family .
-RUN npm install --no-audi --progress=false
+RUN npm install --no-audi
 RUN npm run build
 
 #TODO convert to copy, this is im this git we just cloned, no need to get it from outside

@@ -4,7 +4,8 @@ RUN apt update -y && \
     apt install -y --no-install-recommends --no-install-suggests \
     nginx \
     ca-certificates &&\
-    rm -rf /var/cache/apt/
+    rm -rf /var/cache/apt/ &&\
+    rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /project/
 RUN mkdir -p /project/minion-server

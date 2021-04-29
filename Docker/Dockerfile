@@ -26,7 +26,7 @@ RUN npm install --no-audi && \
 ADD Docker/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 RUN rm -rf /etc/apt/apt.conf.d/90nginx
 
-#EXPOSE 90
+EXPOSE 90
 
 STOPSIGNAL SIGTERM
 

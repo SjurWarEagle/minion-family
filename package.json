@@ -40,7 +40,7 @@
     "lodash": "4.17.21",
     "chroma-js": "2.1.1",
     "gsap": "3.6.1",
-    "npm-check-updates": "11.5.1",
+    "npm-check-updates": "11.5.7",
     "rxjs": "6.6.7",
     "html2canvas": "1.0.0-rc.7",
     "tslib": "2.2.0",
